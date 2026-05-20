@@ -216,6 +216,12 @@ th{color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:.5p
   </div>
 </section>
 
+
+<section class="section">
+  <div class="section-title">XMRT Insights (paragraph.com/@xmrt)</div>
+  <div class="card" id="rss-card"><div style="color:var(--muted)">Loading...</div></div>
+</section>
+
 <footer style="padding:40px 24px;text-align:center;color:var(--muted);font-size:12px;border-top:1px solid rgba(255,255,255,.05)">
   XMRT DAO · Built by devgrugold · <a href="https://github.com/xmrtdao">GitHub</a> · <a href="https://relay.mobilemonero.com">Relay</a> · <a href="https://partyfavorphoto.com">PFP</a>
   <div style="margin-top:8px;color:#444">Android Termux · Cloudflare Workers · Supabase · Monero</div>
@@ -361,9 +367,41 @@ async function loadCommits(){
   }catch(e){$('commits-card').innerHTML='<div style="color:var(--red)">Unavailable</div>';}
 }
 
-loadPrice();loadRelay();loadAPI();loadWorkers();loadChat();loadCommits();
+async function loadRSS(){
+  try{
+    const proxy='https://api.allorigins.win/get?url='+encodeURIComponent('https://api.paragraph.com/blogs/rss/@xmrt');
+    const r=await fetch(proxy);
+    if(!r.ok)throw new Error('');
+    const j=await r.json();
+    if(!j.contents)throw new Error('');
+    const text=j.contents;
+    // Simple RSS parser
+    const items=[];
+    const itemRe=/<item>([\s\S]*?)<\/item>/g;
+    let m;
+    while((m=itemRe.exec(text))!==null){
+      const block=m[1];
+      const title=(block.match(/<title><!\[CDATA\[(.*?)\]\]><\/title>/)||block.match(/<title>(.*?)<\/title>/))?.[1]||'';
+      const link=(block.match(/<link>(.*?)<\/link>/)||[])[1]||'';
+      const pubDate=(block.match(/<pubDate>(.*?)<\/pubDate>/)||[])[1]||'';
+      const desc=(block.match(/<description><!\[CDATA\[(.*?)\]\]><\/description>/)||block.match(/<description>(.*?)<\/description>/))?.[1]||'';
+      if(title)items.push({title,link,pubDate:pubDate?new Date(pubDate).toLocaleDateString():'',desc});
+    }
+    if(!items.length){$('rss-card').innerHTML='<div style="color:var(--muted)">No posts</div>';return}
+    $('rss-card').innerHTML='<div>'+items.slice(0,5).map(x=>{
+      const snippet=x.desc.replace(/<[^>]+>/g,'').slice(0,140)+'...';
+      return `<div style="padding:12px 0;border-bottom:1px solid #1a1a1a">
+        <a href="${x.link}" target="_blank" style="font-weight:700;color:var(--mono);font-size:14px">${x.title}</a>
+        <div style="font-size:11px;color:var(--muted);margin-top:4px">${x.pubDate} · paragraph.com/@xmrt</div>
+        <div style="font-size:12px;color:#bbb;margin-top:4px;line-height:1.5">${snippet}</div>
+      </div>`;
+    }).join('')+'</div>';
+  }catch(e){$('rss-card').innerHTML='<div style="color:var(--red)">Unable to load RSS. <a href="https://paragraph.com/@xmrt" target="_blank">Read on paragraph →</a></div>';}
+}
+
+loadPrice();loadRelay();loadAPI();loadWorkers();loadChat();loadCommits();loadRSS();
 setInterval(loadPrice,30000);setInterval(loadRelay,60000);setInterval(loadAPI,60000);
-setInterval(loadChat,60000);setInterval(loadCommits,300000);
+setInterval(loadChat,60000);setInterval(loadCommits,300000);setInterval(loadRSS,600000);
 </script>
 </body>
 </html>
