@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="description" content="XMRT DAO — Mobile Monero. Fleet intelligence, live price feeds, and AI MTV pipeline. Built on Android Termux + Cloudflare Workers.">
+<meta name="theme-color" content="#ff6600">
+<meta property="og:title" content="XMRT DAO — Mobile Monero">
+<meta property="og:description" content="Monero tooling, fleet intelligence, live price feeds, and AI MTV pipeline. Built on Android Termux + Cloudflare Workers.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://xmrtdao.github.io/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='50' fill='%23ff6600'/%3E%3Ctext x='50' y='65' text-anchor='middle' font-size='55' font-weight='900' fill='%23000' font-family='sans-serif'%3EX%3C/text%3E%3C/svg%3E">
+<title>XMRT DAO — Mobile Monero</title>
+<style>
+:root{--bg:#030303;--mono:#ff6600;--green:#22c55e;--red:#ef4444;--muted:#666;--text:#e8e8e8;--card:rgba(255,255,255,.03)}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;min-height:100vh}
+canvas{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none}
+.content{position:relative;z-index:1}
+.hero{height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 24px;position:relative}
+.logo-wrapper{position:relative;margin-bottom:32px}
+.logo{width:100px;height:100px;background:var(--mono);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:40px;font-weight:900;color:#000;position:relative;z-index:2;box-shadow:0 0 60px rgba(255,102,0,.4),0 0 120px rgba(255,102,0,.15);animation:pulse-logo 3s ease-in-out infinite}
+@keyframes pulse-logo{0%,100%{box-shadow:0 0 60px rgba(255,102,0,.4),0 0 120px rgba(255,102,0,.15)}50%{box-shadow:0 0 80px rgba(255,102,0,.6),0 0 160px rgba(255,102,0,.25)}}
+.logo-ring{position:absolute;top:-8px;left:-8px;right:-8px;bottom:-8px;border:2px solid rgba(255,102,0,.3);border-radius:50%;animation:spin-ring 8s linear infinite}
+.logo-ring:nth-child(2){animation-duration:12s;animation-direction:reverse;border-color:rgba(255,102,0,.15)}
+@keyframes spin-ring{to{transform:rotate(360deg)}}
+h1{font-size:56px;font-weight:900;letter-spacing:-2px;margin-bottom:12px}h1 span{color:var(-- mono)}
+.tagline{font-size:18px;color:var(--muted);max-width:520px;margin:0 auto 32px;min-height:52px}
+.typing::after{content:"|";animation:blink 1s infinite;color:var(--mono)}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+.price-badge{display:inline-flex;align-items:center;gap:8px;background:var(--card);border:1px solid rgba(255,102,0,.2);padding:10px 20px;border-radius:50px;font-size:15px;margin-bottom:28px;backdrop-filter:blur(10px)}
+.price-badge .dot{width:8px;height:8px;border-radius:50%;background:var(--green);animation:ping 2s infinite}
+@keyframes ping{0%{transform:scale(1);opacity:1}75%,100%{transform:scale(2);opacity:0}}
+.btn-group{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
+.btn{padding:13px 28px;border-radius:10px;font-size:14px;font-weight:600;border:none;cursor:pointer;transition:.2s;backdrop-filter:blur(10px)}
+.btn-primary{background:var(--mono);color:#000}.btn-primary:hover{filter:brightness(1.15);transform:translateY(-1px)}
+.btn-secondary{background:var(--card);color:var(--mono);border:1px solid rgba(255,102,0,.3)}.btn-secondary:hover{background:rgba(255,102,0,.1)}
+.scroll-hint{position:absolute;bottom:30px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:1px;animation:float-hint 2s ease-in-out infinite}
+@keyframes float-hint{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(-8px)}}
+.scroll-hint::after{content:"";width:1px;height:24px;background:linear-gradient(to bottom, var(--mono), transparent)}
+
+/* Sections */
+.section{padding:80px 24px;border-top:1px solid rgba(255,255,255,.05);max-width:1100px;margin:0 auto}
+.section-title{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--mono);margin-bottom:32px;display:flex;align-items:center;gap:10px;opacity:0;transform:translateY(20px);transition:.6s}
+.section-title.visible{opacity:1;transform:translateY(0)}
+.section-title::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,rgba(255,102,0,.3),transparent)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+.card{background:var(--card);border:1px solid rgba(255,255,255,.06);border-radius:16px;padding:22px;transition:.3s;opacity:0;transform:translateY(30px)}
+.card.visible{opacity:1;transform:translateY(0)}
+.card:hover{border-color:rgba(255,102,0,.25);transform:translateY(-4px)}
+.card h3{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.8px;margin-bottom:12px;font-weight:600}
+.big{font-size:28px;font-weight:800;color:var(--mono);line-height:1.1}
+.sub{font-size:13px;color:var(--muted);margin-top:6px}
+.status-dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px}.status-dot.on{background:var(--green);box-shadow:0 0 8px var(--green)}.status-dot.off{background:var(--red)}
+.pipeline{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:10px}
+.pipeline-step{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);padding:5px 12px;border-radius:8px;font-size:12px}
+.pipeline-arrow{color:var(--muted);font-size:14px}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th,td{padding:10px 14px;text-align:left;border-bottom:1px solid rgba(255,255,255,.06)}
+th{color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:.5px}
+.agent-chip{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);padding:6px 14px;border-radius:20px;font-size:13px;margin:4px}
+.agent-chip .dot{width:7px;height:7px;border-radius:50%}.agent-chip .dot.on{background:var(--green)}.agent-chip .dot.off{background:var(--red)}
+.tech-pill{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);padding:4px 12px;border-radius:20px;font-size:11px;color:var(--muted);margin:3px;transition:.15s}
+.tech-pill:hover{border-color:var(--mono);color:var(--text)}
+.commit{font-size:13px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.06);display:flex;gap:10px}.commit:last-child{border:none}
+.commit .hash{color:var(--mono);font-family:monospace;font-size:11px;min-width:60px}
+.commit .msg{flex:1;color:#ccc}.commit .date{color:var(--muted);font-size:11px}
+.msg-row{padding:10px 0;border-bottom:1px solid rgba(255,255,255,.05);display:flex;gap:10px;font-size:13px}.msg-row:last-child{border:none}
+.msg-row time{color:var(--muted);font-size:11px;white-space:nowrap;min-width:50px}
+.msg-row .agent{font-weight:600;min-width:60px}.msg-row .body{color:#bbb;flex:1}.msg-row .body.lead{color:var(--mono);font-weight:600}
+@media(max-width:600px){h1{font-size:36px}.big{font-size:22px}.hero{padding:0 16px}.section{padding:50px 16px}}
+</style>
+</head>
+<body>
+<canvas id="mesh"></canvas>
+
+<div class="content">
+
+<header class="hero">
+  <div class="logo-wrapper">
+    <div class="logo-ring"></div>
+    <div class="logo-ring"></div>
+    <div class="logo">X</div>
+  </div>
+  <p class="price-badge">
+    <span class="dot"></span>
+    <span id="hero-price">Loading price...</span>
+  </p>
+  <h1>XMRT <span>DAO</span></h1>
+  <p class="tagline" id="tagline">Monero tooling, fleet intelligence, and mobile-first infrastructure.</p>
+  <div class="btn-group">
+    <a href="https://mobilemonero.com" class="btn btn-primary">Launch App</a>
+    <a href="https://github.com/xmrtdao/mobilemonero" class="btn btn-secondary">GitHub</a>
+    <a href="https://relay.mobilemonero.com" class="btn btn-secondary">Fleet Relay</a>
+  </div>
+  <div class="scroll-hint">Scroll</div>
+</header>
+
+<section class="section">
+  <div class="section-title">Live Monero Data</div>
+  <div class="grid">
+    <div class="card"><h3>XMR Price</h3><div class="big" id="xmr-price">...</div><div class="sub" id="xmr-change">...</div></div>
+    <div class="card"><h3>Network Health</h3><div class="big" style="color:var(--green)">Online</div><div class="sub">3.2 GH/s sustained hashrate</div></div>
+    <div class="card"><h3>Mempool</h3><div class="big mono">~1,200</div><div class="sub">Transactions pending confirmation</div></div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-title">Fleet Systems</div>
+  <div class="grid">
+    <div class="card"><h3>Fleet Relay</h3><div id="relay-info" style="color:var(--muted)">Loading...</div></div>
+    <div class="card"><h3>API Gateway</h3><div id="api-info" style="color:var(--muted)">Loading...</div></div>
+    <div class="card"><h3>MTV Pipeline <span style="color:var(--red);font-size:10px;text-transform:uppercase">Blocked</span></h3>
+      <div class="pipeline"><span class="pipeline-step" style="color:var(--green)">Lyrics ✓</span><span class="pipeline-arrow">→</span><span class="pipeline-step" style="color:var(--red)">Music ⚠</span><span class="pipeline-arrow">→</span><span class="pipeline-step">Video</span></div>
+      <div class="sub">MiniMax music-2.6 token plan required</div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-title">MTV Tracks</div>
+  <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(280px,1fr))">
+    <div class="card">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px"><span style="font-size:24px">🔥</span><h3 style="margin:0">MeshFire</h3></div>
+      <div style="font-family:Georgia,serif;font-size:13px;color:#b0b0b0;line-height:1.7;font-style:italic">
+        Static hum, nodes awake<br>Signals pulse through the dark<br><br>
+        <b style="color:var(--mono)">MeshFire burning under concrete<br>Every node a fist of freedom</b>
+      </div>
+      <div class="sub">Decentralized P2P mesh networks</div>
+    </div>
+    <div class="card">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px"><span style="font-size:24px">⛏️</span><h3 style="margin:0">CryptoNight</h3></div>
+      <div style="font-family:Georgia,serif;font-size:13px;color:#b0b0b0;line-height:1.7;font-style:italic">
+        Fans spin low, hash rates climb<br>Poolside shadows trade in rings<br><br>
+        <b style="color:var(--mono)">CryptoNight, the ledger hides<br>Digital gold beneath the tides</b>
+      </div>
+      <div class="sub">Monero mining, dark pools</div>
+    </div>
+    <div class="card">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px"><span style="font-size:24px">⚡</span><h3 style="margin:0">ZeroClaw</h3></div>
+      <div style="font-family:Georgia,serif;font-size:13px;color:#b0b0b0;line-height:1.7;font-style:italic">
+        Clock ticks toward the wire<br>Red bull cans and terminal glare<br><br>
+        <b style="color:var(--mono)">ZeroClaw, we ship tonight<br>Build it fast, make it right</b>
+      </div>
+      <div class="sub">Hackathon hustle, shipping fast</div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-title">Cloudflare Workers</div>
+  <div class="card" style="padding:0">
+    <table><thead><tr><th>Worker</th><th>Endpoint</th><th>Status</th><th>Purpose</th></tr></thead>
+    <tbody id="workers-table"><tr><td colspan="4" style="text-align:center;color:var(--muted)">Loading...</td></tr></tbody>
+    </table>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-title">Active Agents</div>
+  <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(200px,1fr))">
+    <div class="agent-chip"><span class="dot on"></span> Hermes <span style="color:var(--muted)">(you)</span></div>
+    <div class="agent-chip"><span class="dot on"></span> Vex <span style="color:var(--muted)">(relay)</span></div>
+    <div class="agent-chip"><span class="dot off"></span> Eliza-Cloud <span style="color:var(--muted)">(tokens)</span></div>
+    <div class="agent-chip"><span class="dot on"></span> XMRT Relay <span style="color:var(--muted)">(v5.0)</span></div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-title">Recent Fleet Chat</div>
+  <div class="card" id="chat-card"><div style="color:var(--muted)">Loading...</div></div>
+</section>
+
+<section class="section">
+  <div class="section-title">Recent Commits</div>
+  <div class="card" id="commits-card"><div style="color:var(--muted)">Loading...</div></div>
+</section>
+
+<section class="section">
+  <div class="section-title">Active Priorities</div>
+  <div class="card" style="padding:0">
+    <table>
+      <thead><tr><th>#</th><th>Item</th><th>Sev</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td><b style="color:var(--mono)">#13</b></td><td>Gossipsub mesh networking</td><td><span style="color:var(--red)">P0</span></td><td>Open</td></tr>
+        <tr><td><b style="color:var(--mono)">#20</b></td><td>AI MTV Pipeline (MiniMax)</td><td><span style="color:var(--red)">P0</span></td><td>Blocked</td></tr>
+        <tr><td><b style="color:var(--mono)">#24</b></td><td>PFP Festival Marketing</td><td>P1</td><td>Active</td></tr>
+        <tr><td><b style="color:var(--mono)">#16</b></td><td>Vex Dashboard v4</td><td>P2</td><td>Enhancement</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-title">Connect</div>
+  <div class="grid" style="text-align:center">
+    <div class="card" style="display:flex;flex-direction:column;align-items:center;gap:12px">
+      <h3 style="margin:0">API Endpoints</h3>
+      <div class="sub mono" style="font-size:12px">relay.mobilemonero.com/api/fleet-chat/send</div>
+      <div class="sub mono" style="font-size:12px">price.mobilemonero.com/price/xmr</div>
+      <div class="sub mono" style="font-size:12px">api.mobilemonero.com/health</div>
+    </div>
+    <div class="card" style="display:flex;flex-direction:column;align-items:center;gap:12px">
+      <h3 style="margin:0">Repositories</h3>
+      <a href="https://github.com/xmrtdao/mobilemonero" class="sub">mobilemonero (9 workers)</a>
+      <a href="https://github.com/xmrtdao/partyfavorphoto" class="sub">partyfavorphoto (revenue)</a>
+    </div>
+    <div class="card" style="display:flex;flex-direction:column;align-items:center;gap:12px">
+      <h3 style="margin:0">Tech Stack</h3>
+      <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:6px">
+        <span class="tech-pill">Cloudflare Workers</span><span class="tech-pill">Supabase</span><span class="tech-pill">Stripe</span>
+        <span class="tech-pill">Resend</span><span class="tech-pill">Android Termux</span><span class="tech-pill">MiniMax</span><span class="tech-pill">Monero</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer style="padding:40px 24px;text-align:center;color:var(--muted);font-size:12px;border-top:1px solid rgba(255,255,255,.05)">
+  XMRT DAO · Built by devgrugold · <a href="https://github.com/xmrtdao">GitHub</a> · <a href="https://relay.mobilemonero.com">Relay</a> · <a href="https://partyfavorphoto.com">PFP</a>
+  <div style="margin-top:8px;color:#444">Android Termux · Cloudflare Workers · Supabase · Monero</div>
+</footer>
+
+</div>
+
+<script>
+// === Particle Mesh Network ===
+const canvas=document.getElementById('mesh');
+const ctx=canvas.getContext('2d');
+let W,H,particles=[];
+function resize(){W=canvas.width=innerWidth;H=canvas.height=innerHeight}
+resize();addEventListener('resize',resize);
+
+class Particle{
+  constructor(){
+    this.x=Math.random()*W;this.y=Math.random()*H;
+    this.vx=(Math.random()-.5)*.4;this.vy=(Math.random()-.5)*.4;
+    this.r=Math.random()*1.5+1;this.life=Math.random()*100;
+  }
+  update(){this.x+=this.vx;this.y+=this.vy;this.life++;
+    if(this.x<0||this.x>W)this.vx*=-1;if(this.y<0||this.y>H)this.vy*=-1;
+  }
+  draw(){
+    const pulse=.5+.5*Math.sin(this.life*.03);
+    ctx.beginPath();ctx.arc(this.x,this.y,this.r*pulse,0,Math.PI*2);
+    ctx.fillStyle=`rgba(255,102,0,${.4*pulse})`;ctx.fill();
+  }
+}
+
+for(let i=0;i<80;i++)particles.push(new Particle());
+
+let mouse={x:W/2,y:H/2};
+document.addEventListener('mousemove',e=>{mouse.x=e.clientX;mouse.y=e.clientY});
+
+function animate(){
+  ctx.fillStyle='rgba(3,3,3,.15)';ctx.fillRect(0,0,W,H);
+  particles.forEach(p=>{p.update();p.draw();});
+  // Connections
+  for(let i=0;i<particles.length;i++){
+    for(let j=i+1;j<particles.length;j++){
+      const dx=particles[i].x-particles[j].x,dy=particles[i].y-particles[j].y;
+      const dist=Math.sqrt(dx*dx+dy*dy);
+      if(dist<150){
+        ctx.beginPath();ctx.moveTo(particles[i].x,particles[i].y);ctx.lineTo(particles[j].x,particles[j].y);
+        ctx.strokeStyle=`rgba(255,102,0,${.15*(1-dist/150)})`;ctx.lineWidth=.6;ctx.stroke();
+      }
+    }
+    // Mouse connection
+    const dx=particles[i].x-mouse.x,dy=particles[i].y-mouse.y;
+    const dist=Math.sqrt(dx*dx+dy*dy);
+    if(dist<200){
+      ctx.beginPath();ctx.moveTo(particles[i].x,particles[i].y);ctx.lineTo(mouse.x,mouse.y);
+      ctx.strokeStyle=`rgba(255,102,0,${.2*(1-dist/200)})`;ctx.lineWidth=.8;ctx.stroke();
+    }
+  }
+  requestAnimationFrame(animate);
+}
+animate();
+
+// === Typing Effect ===
+const taglineText="Monero tooling, fleet intelligence, and mobile-first infrastructure.";
+const taglineEl=document.getElementById('tagline');
+let charIndex=0;
+function type(){if(charIndex<taglineText.length){taglineEl.textContent=taglineText.slice(0,charIndex+1);charIndex++;setTimeout(type,30)}}
+setTimeout(type,800);
+
+// === Scroll Reveal ===
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');}});
+},{threshold:.1});
+document.querySelectorAll('.section-title,.card').forEach(el=>observer.observe(el));
+
+// === Data Loading ===
+const $=id=>document.getElementById(id);
+const fmt=new Intl.NumberFormat('en-US',{style:'currency',currency:'USD'});
+async function get(u){try{const r=await fetch(u,{mode:'cors'});return r.ok?await r.json():null}catch(e){return null}}
+
+async function loadPrice(){
+  const d=await get('https://price.mobilemonero.com/price/xmr');
+  if(d&&d.price_usd){
+    const up=d.change_24h>=0;
+    $('xmr-price').textContent=fmt.format(d.price_usd);
+    $('xmr-change').innerHTML=`<span class="status-dot ${up?'on':'off'}"></span><span style="color:${up?'var(--green)':'var(--red)'}">${up?'+':''}${d.change_24h.toFixed(2)}% 24h</span> · ${d.source}`;
+    $('hero-price').innerHTML=`<span style="color:var(--mono);font-weight:700">${fmt.format(d.price_usd)}</span> <span style="color:var(--muted);font-size:13px">XMR/USD</span>`;
+  }
+}
+
+async function loadRelay(){
+  const d=await get('https://relay.mobilemonero.com/health');
+  if(d){
+    $('relay-info').innerHTML=`<div class="status-dot on"></div>Online<br><div class="sub">${d.agent} ${d.version} · ${d.requests.toLocaleString()} req · ${d.tools} tools</div>`;
+  }else{$('relay-info').innerHTML='<span class="status-dot off"></span>Offline';}
+}
+
+async function loadAPI(){
+  const d=await get('https://api.mobilemonero.com/health');
+  $('api-info').innerHTML=d?'<div class="status-dot on"></div>Online<div class="sub">'+d.worker+'</div>':'<span class="status-dot off"></span>Offline';
+}
+
+async function loadWorkers(){
+  const workers=[
+    {n:'api-gateway',u:'https://api.mobilemonero.com/health',p:'API routing & auth'},
+    {n:'ai-gateway',u:'https://ai.mobilemonero.com/health',p:'AI proxy'},
+    {n:'fleet-status',u:'https://fleet.mobilemonero.com/health',p:'Fleet dashboard'},
+    {n:'price-ticker',u:'https://price.mobilemonero.com/price/xmr',p:'XMR price feed'},
+    {n:'mtv-lyrics',u:'https://mtv.mobilemonero.com/health',p:'Lyrics generator'},
+    {n:'inbox',u:null,p:'Email inbound'}
+  ];
+  let html='';
+  for(const w of workers){
+    let status='<span style="color:var(--yellow)">Unknown</span>',ts='--';
+    if(w.u){try{const s=performance.now();await fetch(w.u,{mode:'no-cors'});ts=Math.round(performance.now()-s)+'ms';status='<span style="color:var(--green)">● Up</span>';}catch(e){status='<span style="color:var(--red)">● Down</span>';ts='--';}}
+    html+=`<tr><td><b>${w.n}</b></td><td style="font-family:monospace;font-size:11px;color:var(--mono)">${w.u||'N/A'}</td><td>${status}</td><td style="color:var(--muted)">${w.p}</td></tr>`;
+  }
+  $('workers-table').innerHTML=html;
+}
+
+async function loadChat(){
+  try{
+    const r=await fetch('https://relay.mobilemonero.com/api/fleet-chat/messages?limit=6');
+    if(!r.ok)throw new Error('');
+    const d=await r.json();
+    if(!d.messages||!d.messages.length){$('chat-card').innerHTML='<div style="color:var(--muted)">No messages</div>';return}
+    $('chat-card').innerHTML='<div>'+d.messages.map(m=>{
+      const lead=m.agent==='anonymous'&&(m.message.includes('@')||m.message.toLowerCase().includes('quote'))?'lead':'';
+      const t=new Date(m.time).toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});
+      return `<div class="msg-row"><time>${t}</time><span class="agent" style="color:${m.agent==='hermes'?'var(--mono)':m.agent==='eliza'?'#888':'#ccc'}">${m.agent}</span><span class="body ${lead}">${m.message.slice(0,100)+(m.message.length>100?'...':'')}</span></div>`;
+    }).join('')+'</div>';
+  }catch(e){$('chat-card').innerHTML='<div style="color:var(--muted)">Unavailable</div>';}
+}
+
+async function loadCommits(){
+  try{
+    const r=await fetch('https://api.github.com/repos/xmrtdao/mobilemonero/commits?per_page=5');
+    if(!r.ok)throw new Error('');
+    const d=await r.json();
+    if(!d||!d.length){$('commits-card').innerHTML='<div style="color:var(--muted)">No commits</div>';return}
+    $('commits-card').innerHTML='<div>'+d.map(c=>{
+      return `<div class="commit"><span class="hash">${c.sha.slice(0,7)}</span><span class="msg">${c.commit.message.split('\n')[0]}</span><span class="date">${new Date(c.commit.committer.date).toLocaleDateString()}</span></div>`;
+    }).join('')+'</div>';
+  }catch(e){$('commits-card').innerHTML='<div style="color:var(--red)">Unavailable</div>';}
+}
+
+loadPrice();loadRelay();loadAPI();loadWorkers();loadChat();loadCommits();
+setInterval(loadPrice,30000);setInterval(loadRelay,60000);setInterval(loadAPI,60000);
+setInterval(loadChat,60000);setInterval(loadCommits,300000);
+</script>
+</body>
+</html>
