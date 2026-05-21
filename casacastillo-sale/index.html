@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Casa Castillo — $499K Costa Rica Eco-Estate | Now With New Bridge Access</title>
+<meta name="description" content="Casa Castillo (Floriso): 4-unit income-producing eco-estate in El Castillo, Costa Rica. Spectacular sunset + Arenal lake views. New bridge cuts 1 hour to Pacific beaches. Asking $499K USD.">
+<meta name="keywords" content="Costa Rica real estate, Arenal property, El Castillo investment, eco-lodge for sale, income property Costa Rica">
+<meta property="og:title" content="Casa Castillo — $499K Costa Rica Eco-Estate For Sale">
+<meta property="og:description" content="4-unit income property with Arenal lake views. New bridge access. Owner financing available.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://casacastillo.vercel.app/sale">
+<style>
+*,*::before,*::after{box-sizing:border-box}
+:root{--primary:#2d6a4f;--accent:#ff9f1c;--dark:#1b4332;--light:#d8f3dc;--text:#2b2d42;--bg:#f8f9fa;--card:#fff;--shadow:0 4px 20px rgba(0,0,0,.1)}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;margin:0;padding:0;background:var(--bg);color:var(--text);line-height:1.6}
+.container{max-width:1200px;margin:0 auto;padding:0 20px}
+
+/* Hero */
+.hero{background:linear-gradient(135deg,#1b4332,#2d6a4f);color:#fff;padding:80px 20px;text-align:center;position:relative;overflow:hidden}
+.hero-badge{display:inline-block;background:var(--accent);color:#fff;padding:8px 20px;border-radius:30px;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:20px;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
+.hero h1{font-size:48px;margin:0 0 15px;font-weight:800;letter-spacing:-1px}
+.hero-price{font-size:36px;font-weight:700;color:var(--accent);margin:10px 0}
+.hero-subtitle{font-size:18px;opacity:.9;max-width:600px;margin:0 auto 30px}
+.hero-cta{display:inline-flex;gap:15px;flex-wrap:wrap;justify-content:center;margin-top:20px}
+.btn{display:inline-block;padding:14px 32px;border-radius:8px;font-weight:600;text-decoration:none;transition:all .2s;cursor:pointer;border:none;font-size:16px}
+.btn-primary{background:var(--accent);color:#fff}
+.btn-primary:hover{background:#e8890b;transform:translateY(-2px)}
+.btn-secondary{background:rgba(255,255,255,.2);color:#fff;border:1px solid rgba(255,255,255,.3)}
+.btn-secondary:hover{background:rgba(255,255,255,.3)}
+
+/* Urgent Banner */
+.urgent{background:#ff6b6b;color:#fff;text-align:center;padding:12px;font-weight:600;font-size:15px}
+.urgent span{background:#fff;color:#ff6b6b;padding:2px 10px;border-radius:4px;font-weight:800}
+
+/* Features */
+.features{padding:60px 0}
+.features h2{text-align:center;font-size:32px;margin:0 0 10px;color:var(--dark)}
+.features-sub{text-align:center;color:#666;margin-bottom:50px;font-size:16px}
+.features-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:25px}
+.feature-card{background:var(--card);padding:30px;border-radius:12px;box-shadow:var(--shadow);transition:transform .2s}
+.feature-card:hover{transform:translateY(-5px)}
+.feature-icon{font-size:40px;margin-bottom:15px}
+.feature-card h3{margin:0 0 10px;color:var(--dark);font-size:20px}
+.feature-card p{margin:0;color:#666;font-size:14px}
+.highlight{border:2px solid var(--accent)}
+
+/* Property Specs */
+.specs{background:var(--light);padding:60px 0}
+.specs-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:20px;text-align:center}
+.spec-item{background:#fff;padding:25px;border-radius:10px;box-shadow:var(--shadow)}
+.spec-value{font-size:36px;font-weight:800;color:var(--primary);margin:0}
+.spec-label{font-size:14px;color:#666;margin-top:5px}
+
+/* Bridge */
+.bridge{background:linear-gradient(135deg,#2d6a4f,#40916c);color:#fff;padding:60px 20px;text-align:center}
+.bridge h2{margin:0 0 15px;font-size:32px}
+.bridge p{font-size:18px;max-width:700px;margin:0 auto 25px;opacity:.95}
+.bridge .btn-primary{background:#fff;color:var(--dark)}
+
+/* ROI */
+.roi{padding:60px 0;background:#fff}
+.roi h2{text-align:center;font-size:32px;margin-bottom:40px;color:var(--dark)}
+.roi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:30px;max-width:900px;margin:0 auto}
+.roi-item{text-align:center;padding:30px;border-radius:12px;background:var(--bg)}
+.roi-item h3{color:var(--primary);font-size:20px;margin-bottom:10px}
+.roi-item .big{font-size:36px;font-weight:800;color:var(--accent);margin:10px 0}
+
+/* Contact */
+.contact{padding:60px 0;text-align:center;background:var(--dark);color:#fff}
+.contact h2{font-size:32px;margin:0 0 15px}
+.contact p{font-size:18px;opacity:.9;margin-bottom:30px}
+.contact-methods{display:flex;flex-wrap:wrap;justify-content:center;gap:25px;margin:30px 0}
+.contact-method{padding:25px 40px;background:rgba(255,255,255,.1);border-radius:12px;min-width:250px}
+.contact-method h3{margin:0 0 8px;font-size:20px}
+.contact-method a{color:var(--accent);font-size:18px;font-weight:600;text-decoration:none}
+.contact-method a:hover{text-decoration:underline}
+
+/* Form */
+.lead-form{background:var(--card);padding:40px;border-radius:12px;box-shadow:var(--shadow);max-width:600px;margin:40px auto 0;text-align:left}
+.lead-form h3{text-align:center;color:var(--dark);margin-bottom:25px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:15px;margin-bottom:15px}
+.form-group{margin-bottom:15px}
+.form-group label{display:block;margin-bottom:6px;font-weight:600;color:var(--text);font-size:14px}
+.form-group input,.form-group select,.form-group textarea{width:100%;padding:12px;border:1px solid #ddd;border-radius:8px;font-size:15px;font-family:inherit}
+.form-group textarea{min-height:100px;resize:vertical}
+.submit-btn{width:100%;padding:16px;background:var(--accent);color:#fff;border:none;border-radius:8px;font-size:18px;font-weight:700;cursor:pointer}
+.submit-btn:hover{background:#e8890b}
+.form-note{text-align:center;font-size:13px;color:#666;margin-top:15px}
+
+/* Footer */
+footer{text-align:center;padding:30px;font-size:13px;color:#666;background:#e9ecef}
+
+/* Responsive */
+@media(max-width:600px){
+.hero h1{font-size:32px}
+.hero-price{font-size:28px}
+.form-row{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- Urgent Banner -->
+<div class="urgent">🚨 <span>MAJOR UPDATE</span>: New Pacific Coast bridge now open — property values surging. Act fast.</div>
+
+<!-- Hero -->
+<section class="hero">
+<div class="container">
+<span class="hero-badge">Owner Financing Available</span>
+<h1>Casa Castillo</h1>
+<div class="hero-price">Asking Price: $499,000 USD</div>
+<div class="hero-subtitle">4-Unit Income-Producing Eco-Estate in El Castillo, Costa Rica — Spectacular Sunset & Arenal Lake Views</div>
+<div class="hero-cta">
+<a href="#contact" class="btn btn-primary">Schedule a Viewing</a>
+<a href="https://casacastillo.vercel.app" class="btn btn-secondary">View Original Listing →</a>
+</div>
+</div>
+</section>
+
+<!-- Property Specs -->
+<section class="specs">
+<div class="container">
+<h2 style="text-align:center;color:var(--dark);margin-bottom:40px;font-size:32px">Property at a Glance</h2>
+<div class="specs-grid">
+<div class="spec-item">
+<div class="spec-value">4</div>
+<div class="spec-label">Flexible Units</div>
+</div>
+<div class="spec-item">
+<div class="spec-value">$499K</div>
+<div class="spec-label">Asking Price (USD)</div>
+</div>
+<div class="spec-item">
+<div class="spec-value">Lake &amp;</div>
+<div class="spec-label">Sunset Views</div>
+</div>
+<div class="spec-item">
+<div class="spec-value">Arenal</div>
+<div class="spec-label">Volcano Region</div>
+</div>
+<div class="spec-item">
+<div class="spec-value">Now</div>
+<div class="spec-label">Available</div>
+</div>
+<div class="spec-item">
+<div class="spec-value">Tourism</div>
+<div class="spec-label">Income Ready</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- Bridge Section -->
+<section class="bridge">
+<div class="container">
+<h2>🌉 The Game-Changer: New Bridge Now Open</h2>
+<p>Central Costa Rica's biggest infrastructure project is complete. The new Pacific Coast bridge from the Arenal region eliminates the slow mountain detour — <strong>cutting a full hour off the drive to the beach</strong>.</p>
+<p style="font-size:22px;font-weight:700">What this means for your investment:</p>
+<div class="roi-grid" style="max-width:800px;margin-top:30px">
+<div class="roi-item" style="background:rgba(255,255,255,.1);color:#fff">
+<h3>🚗 Travel Time</h3>
+<div class="big">−60 min</div>
+<p>to Pacific Coast beaches</p>
+</div>
+<div class="roi-item" style="background:rgba(255,255,255,.1);color:#fff">
+<h3>📈 Property Values</h3>
+<div class="big">Surging</div>
+<p>as accessibility improves</p>
+</div>
+<div class="roi-item" style="background:rgba(255,255,255,.1);color:#fff">
+<h3>👥 Tourism</h3>
+<div class="big">Boost</div>
+<p>more visitors, higher occupancy</p>
+</div>
+</div>
+<a href="#contact" class="btn btn-primary" style="margin-top:30px">Get Details Before Prices Rise →</a>
+</div>
+</section>
+
+<!-- Features -->
+<section class="features">
+<div class="container">
+<h2>Why Casa Castillo?</h2>
+<p class="features-sub">A rare turnkey investment in Costa Rica's fastest-growing tourist corridor</p>
+<div class="features-grid">
+<div class="feature-card highlight">
+<div class="feature-icon">🏡</div>
+<h3>4 Flexible Units</h3>
+<p>Versatile configuration ready for vacation rentals, long-term tenants, or owner residence with income. Currently structured as a profitable vacation rental operation.</p>
+</div>
+<div class="feature-card">
+<div class="feature-icon">🌅</div>
+<h3>Spectacular Views</h3>
+<p>Unobstructed sunset panoramas over Lake Arenal with Arenal volcano backdrop. Guests travel worldwide for this exact view.</p>
+</div>
+<div class="feature-card">
+<div class="feature-icon">💰</div>
+<h3>Income Producing</h3>
+<p>Already operating as a vacation rental business with established guest reviews and booking history. Turnkey cash flow from day one.</p>
+</div>
+<div class="feature-card">
+<div class="feature-icon">🌳</div>
+<h3>Eco-Lodge Appeal</h3>
+<p>Minimalist natural design that aligns with Costa Rica's booming eco-tourism market. Near Monteverde cloud forest and adventure activities.</p>
+</div>
+<div class="feature-card">
+<div class="feature-icon">⬆️</div>
+<h3>Explosive Growth</h3>
+<p>Property values in the Arenal region are climbing rapidly due to improved accessibility and sustained tourism demand. Buy before the next wave.</p>
+</div>
+<div class="feature-card">
+<div class="feature-icon">🤝</div>
+<h3>Owner Financing</h3>
+<p>Flexible terms available for qualified buyers. Skip traditional Costa Rican bank mortgages and work directly with the owner.</p>
+</div>
+</div>
+</div>
+</section>
+
+<!-- Investment Highlights -->
+<section class="roi">
+<div class="container">
+<h2>Investment Highlights</h2>
+<div class="roi-grid">
+<div class="roi-item">
+<h3>💵 Total Investment</h3>
+<div class="big">$499K</div>
+<p>USD asking price</p>
+</div>
+<div class="roi-item">
+<h3>🏗️ Flexible Use Potential</h3>
+<div class="big">Any</div>
+<p>Residential, rental, or commercial</p>
+</div>
+<div class="roi-item">
+<h3>📊 Future Value Multiplier</h3>
+<div class="big">High</div>
+<p>Bridge-driven appreciation incoming</p>
+</div>
+<div class="roi-item">
+<h3>📍 Premium Location</h3>
+<div class="big">Lakefront</div>
+<p>Unmatched sunset + volcano views</p>
+</div>
+</div>
+</div>
+</section>
+
+<!-- Contact -->
+<section class="contact" id="contact">
+<div class="container">
+<h2>Ready to Own Paradise?</h2>
+<p>This property will not last at $499K. With the new bridge surging values and an established income stream, serious buyers should act now.</p>
+<div class="contact-methods">
+<div class="contact-method">
+<h3>📧 Email</h3>
+<a href="mailto:toptourscostarica@gmail.com?subject=Casa%20Castillo%20Inquiry">toptourscostarica@gmail.com</a>
+</div>
+<div class="contact-method">
+<h3>📱 WhatsApp (Fastest)</h3>
+<a href="https://wa.me/message/HS5PQQW3VX6CL1">Message on WhatsApp</a>
+</div>
+</div>
+
+<!-- Lead Form -->
+<div class="lead-form">
+<h3>Request Property Details</h3>
+<form action="https://formspree.io/f/xeqyqjaz" method="POST">
+<div class="form-row">
+<div class="form-group">
+<label for="name">Full Name *</label>
+<input type="text" name="name" id="name" placeholder="Your name" required>
+</div>
+<div class="form-group">
+<label for="email">Email Address *</label>
+<input type="email" name="email" id="email" placeholder="you@example.com" required>
+</div>
+</div>
+<div class="form-group">
+<label for="phone">Phone / WhatsApp</label>
+<input type="tel" name="phone" id="phone" placeholder="+1 555 555 5555">
+</div>
+<div class="form-group">
+<label for="interest">Interest Level *</label>
+<select name="interest" id="interest" required>
+<option value="">Select...</option>
+<option value="immediate">Serious buyer — ready to move fast</option>
+<option value="viewing">Want to schedule a viewing</option>
+<option value="info">Need more info / exploring options</option>
+<option value="investor">Investor — evaluating ROI</option>
+</select>
+</div>
+<div class="form-group">
+<label for="budget">Budget Range</label>
+<select name="budget" id="budget">
+<option value="">Select...</option>
+<option value="under400">Under $400K</option>
+<option value="400-500">$400K – $500K</option>
+<option value="500-700">$500K – $700K</option>
+<option value="700+">$700K+</option>
+</select>
+</div>
+<div class="form-group">
+<label for="message">Message / Questions</label>
+<textarea name="message" id="message" placeholder="Tell us about your timeline, plans for the property, etc."></textarea>
+</div>
+<input type="hidden" name="_subject" value="Casa Castillo Inquiry">
+<input type="hidden" name="_cc" value="toptourscostarica@gmail.com">
+<button type="submit" class="submit-btn">Request Details Now →</button>
+</form>
+<p class="form-note">We respect your privacy. Your information will only be used to respond to this inquiry.</p>
+</div>
+</div>
+</section>
+
+<footer>
+<div class="container">
+<p>© 2025 Casa Castillo / Floriso — El Castillo, Costa Rica | Listed by Owner | Contact: toptourscostarica@gmail.com</p>
+<p style="margin-top:8px;font-size:12px">This property is being sold directly by the owner without a real estate agent or broker. All inquiries handled personally.</p>
+</div>
+</footer>
+
+<script>
+// Simple form handler if Formspree fails
+const form = document.querySelector('form');
+form.addEventListener('submit', function(e) {
+  // Track submissions
+  console.log('Form submitted:', new FormData(form));
+});
+</script>
+
+</body>
+</html>
