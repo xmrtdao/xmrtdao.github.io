@@ -321,7 +321,7 @@ async function loadPrice(){
 }
 
 async function loadRelay(){
-  const d=await get('https://relay.mobilemonero.com/health');
+  const d=await get('https://api.mobilemonero.com/relay-health');
   if(d){
     $('relay-info').innerHTML=`<div class="status-dot on"></div>Online<br><div class="sub">${d.agent} ${d.version} · ${d.requests.toLocaleString()} req · ${d.tools} tools</div>`;
   }else{$('relay-info').innerHTML='<span class="status-dot off"></span>Offline';}
