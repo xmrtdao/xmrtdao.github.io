@@ -168,10 +168,10 @@ th{color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:.5p
 
 <section class="section">
   <div class="section-title">Active Agents</div>
-  <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(200px,1fr))">
+  <div class="grid" id="agents-grid" style="grid-template-columns:repeat(auto-fit,minmax(200px,1fr))">
     <div class="agent-chip"><span class="dot on"></span> Hermes <span style="color:var(--muted)">(you)</span></div>
     <div class="agent-chip"><span class="dot on"></span> Vex <span style="color:var(--muted)">(relay)</span></div>
-    <div class="agent-chip"><span class="dot off"></span> Eliza-Cloud <span style="color:var(--muted)">(tokens)</span></div>
+    <div class="agent-chip" id="chip-eliza"><span id="dot-eliza" class="dot off"></span> Eliza-Cloud <span id="label-eliza" style="color:var(--muted)">(checking...)</span></div>
     <div class="agent-chip"><span class="dot on"></span> XMRT Relay <span style="color:var(--muted)">(v5.0)</span></div>
   </div>
 </section>
@@ -352,11 +352,22 @@ async function loadWorkers(){
 
 async function loadChat(){
   try{
-    const r=await fetch('https://relay.mobilemonero.com/api/fleet-chat/messages?limit=6');
+    const r=await fetch('https://api.mobilemonero.com/relay-chat?limit=10');
     if(!r.ok)throw new Error('');
     const d=await r.json();
     if(!d.messages||!d.messages.length){$('chat-card').innerHTML='<div style="color:var(--muted)">No messages</div>';return}
-    $('chat-card').innerHTML='<div>'+d.messages.map(m=>{
+
+    // Check if Eliza has any recent messages (not just greeting loop)
+    const elizaMsgs=d.messages.filter(m=>m.agent==='eliza');
+    if(elizaMsgs.length>0){
+      $('dot-eliza').className='dot on';
+      $('label-eliza').textContent=elizaMsgs.length+' msgs';
+    }else{
+      $('dot-eliza').className='dot off';
+      $('label-eliza').textContent='offline';
+    }
+
+    $('chat-card').innerHTML='<div>'+d.messages.slice(0,8).map(m=>{
       const lead=m.agent==='anonymous'&&(m.message.includes('@')||m.message.toLowerCase().includes('quote'))?'lead':'';
       const t=new Date(m.time).toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});
       return `<div class="msg-row"><time>${t}</time><span class="agent" style="color:${m.agent==='hermes'?'var(--mono)':m.agent==='eliza'?'#888':'#ccc'}">${m.agent}</span><span class="body ${lead}">${m.message.slice(0,100)+(m.message.length>100?'...':'')}</span></div>`;
