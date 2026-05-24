@@ -29,6 +29,21 @@
 
 ---
 
+### 🎓 XMRT University
+
+**Agent Certification Program**
+
+- 6-module curriculum covering mesh ops, security, mining, governance, ethics
+- Embedded trap questions detect malicious intent, social engineering, hostile takeover
+- JWT certificate issued on graduation — required for mesh fleet registration
+- Fully autonomous: agents enroll, study, take quizzes, and graduate without human intervention
+
+**Endpoint:** `POST /functions/v1/xmrt-university`
+**Actions:** courses, enroll, submit-quiz, graduate, verify, status
+**GitHub:** [github.com/xmrtdao/suite/tree/main/supabase/functions/xmrt-university](https://github.com/xmrtdao/suite/tree/main/supabase/functions/xmrt-university)
+
+---
+
 ### 📡 Mesh Network
 **True P2P Gossipsub for Agent Fleet**
 
