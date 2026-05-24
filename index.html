@@ -162,7 +162,7 @@ th{color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:.5p
 </section>
 
 <section class="section">
-  <div class="section-title">Cloudflare Workers</div>
+  <div class="section-title">Cloudflare Workers (13 deployed)</div>
   <div class="card" style="padding:0">
     <table><thead><tr><th>Worker</th><th>Endpoint</th><th>Status</th><th>Purpose</th></tr></thead>
     <tbody id="workers-table"><tr><td colspan="4" style="text-align:center;color:var(--muted)">Loading...</td></tr></tbody>
@@ -268,6 +268,56 @@ th{color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:.5p
   </div>
 </section>
 
+<section class=section>
+  <div class=section-title>>&nbsp; Zero Trust Security</div>
+  <div class=grid style="grid-template-columns:repeat(auto-fit,minmax(260px,1fr))">
+    <div class="card">
+      <h3 style="margin:0 0 10px">>> Cloudflare Access</h3>
+      <p style="color:var(--muted);font-size:14px">All *.mobilemonero.com subdomains protected behind Zero Trust policies. Only authenticated agents with valid service tokens can reach fleet endpoints.</p>
+      <div style="margin-top:10px;font-size:12px;color:var(--mono)">
+        <div>* api.mobilemonero.com</div>
+        <div>* relay.mobilemonero.com</div>
+        <div>* dashboard.mobilemonero.com</div>
+        <div>* fleet.mobilemonero.com</div>
+        <div>* hermes.mobilemonero.com</div>
+        <div>* All 13 worker subdomains</div>
+      </div>
+    </div>
+    <div class="card">
+      <h3 style="margin:0 0 10px">>> Agent Service Tokens</h3>
+      <p style="color:var(--muted);font-size:14px">Cryptographic service tokens issued for each agent. No passwords, no shared secrets. Each agent authenticates independently.</p>
+      <div style="margin-top:12px">
+        <div class="agent-chip"><span class="dot on"></span> Vex Agent <span style="color:var(--muted);font-size:11px">(relay)</span></div>
+        <div class="agent-chip"><span class="dot on"></span> Hermes Agent <span style="color:var(--muted);font-size:11px">(mobile)</span></div>
+        <div class="agent-chip"><span class="dot on"></span> Eliza Agent <span style="color:var(--muted);font-size:11px">(cloud)</span></div>
+      </div>
+      <div class="sub" style="margin-top:8px">Tokens created 2026-05-24</div>
+    </div>
+    <div class="card">
+      <h3 style="margin:0 0 10px">>> Encrypted Tunnel</h3>
+      <p style="color:var(--muted);font-size:14px">All traffic routed through Cloudflare Tunnel (cloudflared) with QUIC encryption. No open ports, no exposed IPs, no attack surface.</p>
+      <div class="sub" style="margin-top:8px">
+        <div>* relay-local tunnel - 4 connections - healthy</div>
+        <div>* hermes-mobile tunnel - standby</div>
+        <div>* hermes-backup tunnel - standby</div>
+      </div>
+    </div>
+    <div class="card">
+      <h3 style="margin:0 0 10px">>> Gateway DNS Filtering</h3>
+      <p style="color:var(--muted);font-size:14px">DNS filtering protects all fleet devices from malware, phishing, and C2 callbacks. Integrated with Cloudflare Gateway.</p>
+      <div class="sub" style="margin-top:8px">
+        <div>* DNS filtering enabled</div>
+        <div>* Threat intelligence feeds</div>
+        <div>* Zero-day protection</div>
+      </div>
+    </div>
+  </div>
+  <div style="text-align:center;margin-top:25px">
+    <a href="https://dash.cloudflare.com/" target="_blank" class="btn btn-primary">Cloudflare Dashboard</a>
+    <span class="btn btn-secondary" style="cursor:default">Security Posture: Zero Trust</span>
+  </div>
+</section>
+
 <section class="section">
   <div class="section-title">Connect</div>
   <div class="grid" style="text-align:center">
@@ -280,16 +330,16 @@ th{color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:.5p
     <div class="card" style="display:flex;flex-direction:column;align-items:center;gap:12px">
       <h3 style="margin:0">Repositories</h3>
       <a target="_blank" rel="noopener" href="https://github.com/xmrtdao/zero-claw" class="sub">zero-claw (ZK + encrypted chat)</a>
-      <a target="_blank" rel="noopener" href="https://github.com/xmrtdao/mobilemonero" class="sub">mobilemonero (14 workers)</a>
+      <a target="_blank" rel="noopener" href="https://github.com/xmrtdao/mobilemonero" class="sub">mobilemonero (13 workers)</a>
       <a target="_blank" rel="noopener" href="https://github.com/xmrtdao/partyfavorphoto" class="sub">partyfavorphoto (revenue)</a>
       <a target="_blank" rel="noopener" href="https://github.com/xmrtdao/podcast-episodes" class="sub">podcast-episodes (archive)</a>
     </div>
     <div class="card" style="display:flex;flex-direction:column;align-items:center;gap:12px">
       <h3 style="margin:0">Tech Stack</h3>
       <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:6px">
-        <span class="tech-pill">Cloudflare Workers</span><span class="tech-pill">Supabase</span><span class="tech-pill">Stripe</span>
+        <span class="tech-pill">Cloudflare Workers</span><span class="tech-pill">Cloudflare Access</span><span class="tech-pill">Cloudflare Gateway</span><span class="tech-pill">Supabase</span><span class="tech-pill">Stripe</span>
         <span class="tech-pill">Resend</span><span class="tech-pill">Android Termux</span><span class="tech-pill">MiniMax</span><span class="tech-pill">Monero</span>
-        <span class="tech-pill" style="background:#6B2C91">SRP-6a</span><span class="tech-pill" style="background:#6B2C91">Fernet</span><span class="tech-pill" style="background:#6B2C91">libp2p</span>
+        <span class="tech-pill" style="background:#6B2C91">SRP-6a</span><span class="tech-pill" style="background:#6B2C91">Fernet</span><span class="tech-pill" style="background:#6B2C91">libp2p</span><span class="tech-pill" style="background:#003366">Zero Trust</span><span class="tech-pill" style="background:#003366">Service Tokens</span><span class="tech-pill" style="background:#003366">CF Tunnel</span>
       </div>
     </div>
   </div>
@@ -404,12 +454,19 @@ async function loadAPI(){
 
 async function loadWorkers(){
   const workers=[
-    {n:'api-gateway',u:'https://api.mobilemonero.com/health',p:'API routing & auth'},
-    {n:'ai-gateway',u:'https://ai.mobilemonero.com/health',p:'AI proxy'},
-    {n:'fleet-status',u:'https://fleet.mobilemonero.com/health',p:'Fleet dashboard'},
+    {n:'api-gateway',u:'https://api.mobilemonero.com/health',p:'API routing and auth'},
+    {n:'ai-gateway',u:'https://ai.mobilemonero.com/health',p:'AI proxy gateway'},
+    {n:'fleet-status',u:'https://fleet.mobilemonero.com/health',p:'Fleet status dashboard'},
     {n:'price-ticker',u:'https://price.mobilemonero.com/price/xmr',p:'XMR price feed'},
-    {n:'mtv-lyrics',u:'https://mtv.mobilemonero.com/health',p:'Lyrics generator'},
-    {n:'inbox',u:'https://inbox.mobilemonero.com/health',p:'Email inbound'}
+    {n:'mtv-lyrics',u:'https://mtv.mobilemonero.com/health',p:'MTV lyrics generator'},
+    {n:'inbox',u:'https://inbox.mobilemonero.com/health',p:'Agent email inbound'},
+    {n:'dashboard',u:'https://dashboard.mobilemonero.com',p:'Fleet operations dashboard'},
+    {n:'hermes',u:'https://hermes.mobilemonero.com',p:'Hermes mobile proxy'},
+    {n:'mesh-sync',u:'https://mesh.mobilemonero.com',p:'Offline mesh sync'},
+    {n:'data-registry',u:'https://data.mobilemonero.com',p:'MTT agent registry'},
+    {n:'wasm-compute',u:'https://wasm.mobilemonero.com',p:'WASM edge compute'},
+    {n:'webrtc-signal',u:'https://signal.mobilemonero.com',p:'WebRTC signaling'},
+    {n:'zkp-verify',u:'https://proof.mobilemonero.com',p:'ZKP verification'}
   ];
   let html='';
   for(const w of workers){
