@@ -515,19 +515,9 @@ async function loadWorkers(){
 }
 
 async function loadChat(){
-  try{
-    const r=await fetch('https://relay.mobilemonero.com/api/fleet-chat/messages?limit=10');
-    if(!r.ok)throw new Error('Auth required');
-    const d=await r.json();
-    if(!d.messages||!d.messages.length){$('chat-card').innerHTML='<div style="color:var(--muted)">No messages</div>';return}
-    const elizaMsgs=d.messages.filter(m=>m.agent==='eliza');
-    if(elizaMsgs.length>0){$('dot-eliza').className='dot on';$('label-eliza').textContent=elizaMsgs.length+' msgs';}
-    else{$('dot-eliza').className='dot off';$('label-eliza').textContent='offline';}
-    $('chat-card').innerHTML='<div>'+d.messages.slice(0,8).map(m=>{
-      const t=new Date(m.time).toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});
-      return '<div class="msg-row"><time>'+t+'</time><span class="agent" style="color:'+(m.agent==='hermes'?'var(--mono)':m.agent==='eliza'?'#888':'#ccc')+'">'+m.agent+'</span><span class="body">'+(m.message.slice(0,100)+(m.message.length>100?'...':''))+'</span></div>';
-    }).join('')+'</div>';
-  }catch(e){$('chat-card').innerHTML='<div style="color:var(--muted)">Fleet chat requires Zero Trust authentication. <a href="https://relay.mobilemonero.com" style="color:var(--mono)">Open Relay Dashboard</a></div>';}
+  $('chat-card').innerHTML='<div style="color:var(--muted)">Fleet chat is behind Zero Trust authentication. <a href="https://relay.mobilemonero.com" style="color:var(--mono)">Open the Relay Dashboard</a> to see live fleet messages.</div>';
+  $('dot-eliza').className='dot off';
+  $('label-eliza').textContent='dashboard only';
 }
 
 async function loadCommits(){
