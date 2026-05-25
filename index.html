@@ -479,7 +479,7 @@ async function loadPrice(){
     const up=change>=0;
     $('xmr-price').textContent=fmt.format(price);
     $('xmr-change').innerHTML='<span class="status-dot '+(up?'on':'off')+'"></span><span style="color:'+(up?'var(--green)':'var(--red)')+'">'+(up?'+':'')+change.toFixed(2)+'% 24h</span> &middot; CoinGecko';
-    $(''hero-price').innerHTML='<span style="color:var(--mono);font-weight:700">'+fmt.format(price)+'</span> <span style="color:var(--muted);font-size:13px">XMR/USD</span>';
+    $('hero-price').innerHTML='<span style="color:var(--mono);font-weight:700">'+fmt.format(price)+'</span> <span style="color:var(--muted);font-size:13px">XMR/USD</span>';
   }
 }
 
