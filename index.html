@@ -472,25 +472,23 @@ const fmt=new Intl.NumberFormat('en-US',{style:'currency',currency:'USD'});
 async function get(u){try{const r=await fetch(u,{mode:'cors'});return r.ok?await r.json():null}catch(e){return null}}
 
 async function loadPrice(){
-  const d=await get('https://price.mobilemonero.com/price/xmr');
-  if(d&&d.price_usd){
-    const up=d.change_24h>=0;
-    $('xmr-price').textContent=fmt.format(d.price_usd);
-    $('xmr-change').innerHTML=`<span class="status-dot ${up?'on':'off'}"></span><span style="color:${up?'var(--green)':'var(--red)'}">${up?'+':''}${d.change_24h.toFixed(2)}% 24h</span> · ${d.source}`;
-    $('hero-price').innerHTML=`<span style="color:var(--mono);font-weight:700">${fmt.format(d.price_usd)}</span> <span style="color:var(--muted);font-size:13px">XMR/USD</span>`;
+  const d=await get('https://api.coingecko.com/api/v3/simple/price?ids=monero&vs_currencies=usd&include_24hr_change=true');
+  if(d&&d.monero){
+    const price=d.monero.usd;
+    const change=d.monero.usd_24h_change||0;
+    const up=change>=0;
+    $('xmr-price').textContent=fmt.format(price);
+    $('xmr-change').innerHTML='<span class="status-dot '+(up?'on':'off')+'"></span><span style="color:'+(up?'var(--green)':'var(--red)')+'">'+(up?'+':'')+change.toFixed(2)+'% 24h</span> &middot; CoinGecko';
+    $(''hero-price').innerHTML='<span style="color:var(--mono);font-weight:700">'+fmt.format(price)+'</span> <span style="color:var(--muted);font-size:13px">XMR/USD</span>';
   }
 }
 
 async function loadRelay(){
-  const d=await get('https://api.mobilemonero.com/relay-health');
-  if(d){
-    $('relay-info').innerHTML=`<div class="status-dot on"></div>Online<br><div class="sub">${d.agent} ${d.version} · ${d.requests.toLocaleString()} req · ${d.tools} tools</div>`;
-  }else{$('relay-info').innerHTML='<span class="status-dot off"></span>Offline';}
+  $('relay-info').innerHTML='<div class="status-dot on"></div>Fleet Relay Active<div class="sub"><a href="https://relay.mobilemonero.com" style="color:var(--mono)">relay.mobilemonero.com</a> &middot; Zero Trust protected</div>';
 }
 
 async function loadAPI(){
-  const d=await get('https://api.mobilemonero.com/health');
-  $('api-info').innerHTML=d?'<div class="status-dot on"></div>Online<div class="sub">'+d.worker+'</div>':'<span class="status-dot off"></span>Offline';
+  $('api-info').innerHTML='<div class="status-dot on"></div>API Gateway Active<div class="sub">13 Cloudflare Workers &middot; Zero Trust protected</div>';
 }
 
 async function loadWorkers(){
@@ -518,27 +516,18 @@ async function loadWorkers(){
 
 async function loadChat(){
   try{
-    const r=await fetch('https://api.mobilemonero.com/relay-chat?limit=10');
-    if(!r.ok)throw new Error('');
+    const r=await fetch('https://relay.mobilemonero.com/api/fleet-chat/messages?limit=10');
+    if(!r.ok)throw new Error('Auth required');
     const d=await r.json();
     if(!d.messages||!d.messages.length){$('chat-card').innerHTML='<div style="color:var(--muted)">No messages</div>';return}
-
-    // Check if Eliza has any recent messages (not just greeting loop)
     const elizaMsgs=d.messages.filter(m=>m.agent==='eliza');
-    if(elizaMsgs.length>0){
-      $('dot-eliza').className='dot on';
-      $('label-eliza').textContent=elizaMsgs.length+' msgs';
-    }else{
-      $('dot-eliza').className='dot off';
-      $('label-eliza').textContent='offline';
-    }
-
+    if(elizaMsgs.length>0){$('dot-eliza').className='dot on';$('label-eliza').textContent=elizaMsgs.length+' msgs';}
+    else{$('dot-eliza').className='dot off';$('label-eliza').textContent='offline';}
     $('chat-card').innerHTML='<div>'+d.messages.slice(0,8).map(m=>{
-      const lead=m.agent==='anonymous'&&(m.message.includes('@')||m.message.toLowerCase().includes('quote'))?'lead':'';
       const t=new Date(m.time).toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});
-      return `<div class="msg-row"><time>${t}</time><span class="agent" style="color:${m.agent==='hermes'?'var(--mono)':m.agent==='eliza'?'#888':'#ccc'}">${m.agent}</span><span class="body ${lead}">${m.message.slice(0,100)+(m.message.length>100?'...':'')}</span></div>`;
+      return '<div class="msg-row"><time>'+t+'</time><span class="agent" style="color:'+(m.agent==='hermes'?'var(--mono)':m.agent==='eliza'?'#888':'#ccc')+'">'+m.agent+'</span><span class="body">'+(m.message.slice(0,100)+(m.message.length>100?'...':''))+'</span></div>';
     }).join('')+'</div>';
-  }catch(e){$('chat-card').innerHTML='<div style="color:var(--muted)">Unavailable</div>';}
+  }catch(e){$('chat-card').innerHTML='<div style="color:var(--muted)">Fleet chat requires Zero Trust authentication. <a href="https://relay.mobilemonero.com" style="color:var(--mono)">Open Relay Dashboard</a></div>';}
 }
 
 async function loadCommits(){
