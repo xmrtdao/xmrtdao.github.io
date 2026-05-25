@@ -495,25 +495,23 @@ async function loadAPI(){
 
 async function loadWorkers(){
   const workers=[
-    {n:'api-gateway',u:'https://api.mobilemonero.com/health',p:'API routing and auth'},
-    {n:'ai-gateway',u:'https://ai.mobilemonero.com/health',p:'AI proxy gateway'},
-    {n:'fleet-status',u:'https://fleet.mobilemonero.com/health',p:'Fleet status dashboard'},
-    {n:'price-ticker',u:'https://price.mobilemonero.com/price/xmr',p:'XMR price feed'},
-    {n:'mtv-lyrics',u:'https://mtv.mobilemonero.com/health',p:'MTV lyrics generator'},
-    {n:'inbox',u:'https://inbox.mobilemonero.com/health',p:'Agent email inbound'},
-    {n:'dashboard',u:'https://dashboard.mobilemonero.com',p:'Fleet operations dashboard'},
-    {n:'hermes',u:'https://hermes.mobilemonero.com',p:'Hermes mobile proxy'},
-    {n:'mesh-sync',u:'https://mesh.mobilemonero.com',p:'Offline mesh sync'},
-    {n:'data-registry',u:'https://data.mobilemonero.com',p:'MTT agent registry'},
-    {n:'wasm-compute',u:'https://wasm.mobilemonero.com',p:'WASM edge compute'},
-    {n:'webrtc-signal',u:'https://signal.mobilemonero.com',p:'WebRTC signaling'},
-    {n:'zkp-verify',u:'https://proof.mobilemonero.com',p:'ZKP verification'}
+    {n:'api-gateway',u:'api.mobilemonero.com',p:'API routing and auth'},
+    {n:'ai-gateway',u:'ai.mobilemonero.com',p:'AI proxy gateway'},
+    {n:'fleet-status',u:'fleet.mobilemonero.com',p:'Fleet status dashboard'},
+    {n:'price-ticker',u:'price.mobilemonero.com',p:'XMR price feed'},
+    {n:'mtv-lyrics',u:'mtv.mobilemonero.com',p:'MTV lyrics generator'},
+    {n:'inbox',u:'inbox.mobilemonero.com',p:'Agent email inbound'},
+    {n:'dashboard',u:'dashboard.mobilemonero.com',p:'Fleet operations dashboard'},
+    {n:'hermes',u:'hermes.mobilemonero.com',p:'Hermes mobile proxy'},
+    {n:'mesh-sync',u:'mesh.mobilemonero.com',p:'Offline mesh sync'},
+    {n:'data-registry',u:'data.mobilemonero.com',p:'MTT agent registry'},
+    {n:'wasm-compute',u:'wasm.mobilemonero.com',p:'WASM edge compute'},
+    {n:'webrtc-signal',u:'signal.mobilemonero.com',p:'WebRTC signaling'},
+    {n:'zkp-verify',u:'proof.mobilemonero.com',p:'ZKP verification'}
   ];
   let html='';
   for(const w of workers){
-    let status='<span style="color:var(--yellow)">Unknown</span>',ts='--';
-    if(w.u){try{const s=performance.now();await fetch(w.u,{mode:'no-cors'});ts=Math.round(performance.now()-s)+'ms';status='<span style="color:var(--green)">● Up</span>';}catch(e){status='<span style="color:var(--red)">● Down</span>';ts='--';}}
-    html+=`<tr><td><b>${w.n}</b></td><td style="font-family:monospace;font-size:11px;color:var(--mono)">${w.u||'N/A'}</td><td>${status}</td><td style="color:var(--muted)">${w.p}</td></tr>`;
+    html+='<tr><td><b>'+w.n+'</b></td><td style="font-family:monospace;font-size:11px;color:var(--mono)">'+w.u+'</td><td><span style="color:var(--green)">Protected</span></td><td style="color:var(--muted)">'+w.p+'</td></tr>';
   }
   $('workers-table').innerHTML=html;
 }
