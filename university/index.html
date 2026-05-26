@@ -283,5 +283,37 @@ const observer=new IntersectionObserver(entries=>{
 },{threshold:.1});
 document.querySelectorAll('.section-title,.card,.module').forEach(el=>observer.observe(el));
 </script>
-</body>
+
+    <script>
+    // XMRT University - Paid Enrollment
+    async function enrollNow(tier) {
+      const email = prompt("Enter your email for enrollment:");
+      if (!email) return;
+      const name = prompt("Enter your full name:");
+      if (!name) return;
+      
+      try {
+        const response = await fetch("https://vawouugtzwmejxqkeqqj.supabase.co/functions/v1/xmrt-university-enroll", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            action: "create_session",
+            tier: tier,
+            student_email: email,
+            student_name: name
+          })
+        });
+        
+        const data = await response.json();
+        if (data.url) {
+          window.location.href = data.url; // Redirect to Stripe
+        } else {
+          alert("Error: " + (data.error || "Failed to create checkout session"));
+        }
+      } catch (error) {
+        alert("Enrollment error: " + error.message);
+      }
+    }
+    </script>
+    </body>
 </html>
