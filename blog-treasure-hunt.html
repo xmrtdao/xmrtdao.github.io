@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="description" content="While others build SDKs, we build empires. Follow XMRT DAO's 90-day hunt for $52K/mo in revenue across 7 streams.">
+    <meta name="theme-color" content="#ff6600">
+    <meta property="og:title" content="The Treasure Hunt: How XMRT DAO Builds Empires">
+    <meta property="og:description" content="7 revenue streams, $52K/mo target, 90 days to prove the privateer model works.">
+    <meta property="og:type" content="article">
+    <meta property="og:image" content="https://xmrtdao.github.io/assets/og-image.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@xmrtdao">
+    <link rel="icon" href="../assets/xmrtdao.png">
+    <link rel="apple-touch-icon" href="../assets/xmrtdao.png">
+    <title>The Treasure Hunt: How XMRT DAO Builds Empires — XMRT DAO Blog</title>
+    <style>
+        :root{--bg:#030303;--mono:#ff6600;--green:#22c55e;--red:#ef4444;--muted:#666;--text:#e8e8e8;--card:rgba(255,255,255,.03);--purple:#a78bfa}
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;min-height:100vh;line-height:1.7}
+        canvas{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none}
+        .content{position:relative;z-index:10}
+        
+        /* Header */
+        .post-header{padding:100px 24px 60px;text-align:center;border-bottom:1px solid rgba(255,255,255,.05)}
+        .post-header h1{font-size:42px;font-weight:900;letter-spacing:-2px;margin-bottom:16px;max-width:900px;margin-left:auto;margin-right:auto;line-height:1.2}
+        .post-header h1 span{color:var(--mono)}
+        .post-header .meta{display:flex;gap:20px;justify-content:center;flex-wrap:wrap;margin-top:20px;font-size:14px;color:var(--muted)}
+        .series-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(167,139,250,.1);border:1px solid rgba(167,139,250,.3);padding:6px 16px;border-radius:20px;font-size:12px;color:var(--purple);margin-bottom:20px}
+        
+        /* Article */
+        .article{padding:60px 24px;max-width:800px;margin:0 auto}
+        .article p{font-size:17px;margin-bottom:24px;color:#d0d0d0}
+        .article h2{font-size:28px;font-weight:800;margin:48px 0 24px;color:var(--mono);letter-spacing:-1px}
+        .article h3{font-size:20px;font-weight:700;margin:36px 0 16px;color:#b0b0b0}
+        .article ul,.article ol{margin:24px 0 24px 28px}
+        .article li{margin-bottom:12px;font-size:16px;color:#d0d0d0}
+        .article blockquote{border-left:3px solid var(--mono);padding-left:24px;margin:32px 0;font-style:italic;color:#b0b0b0;font-size:18px}
+        .article blockquote strong{color:var(--mono);font-style:normal}
+        .article a{color:var(--mono);text-decoration:none;border-bottom:1px solid rgba(255,102,0,.3)}
+        .article a:hover{border-bottom-color:var(--mono)}
+        
+        /* Tables */
+        .article table{width:100%;border-collapse:collapse;margin:32px 0;font-size:14px;background:var(--card);border-radius:12px;overflow:hidden}
+        .article th{background:rgba(255,102,0,.15);color:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.5px;padding:14px;text-align:left;font-weight:700}
+        .article td{padding:14px;border-top:1px solid rgba(255,255,255,.06);color:#d0d0d0}
+        .article tr:hover td{background:rgba(255,255,255,.02)}
+        
+        /* Code Blocks */
+        .article pre{background:rgba(0,0,0,.4);padding:20px;border-radius:12px;overflow-x:auto;margin:32px 0;border-left:3px solid var(--mono);font-size:13px}
+        .article code{background:rgba(255,102,0,.1);padding:2px 6px;border-radius:4px;font-family:'Courier New',monospace;font-size:14px;color:var(--mono)}
+        .article pre code{background:none;padding:0;border-radius:0;color:#e8e8e8}
+        
+        /* Cards */
+        .revenue-card{background:var(--card);border:1px solid rgba(255,255,255,.06);border-radius:16px;padding:24px;margin:32px 0;transition:.3s}
+        .revenue-card:hover{border-color:rgba(255,102,0,.25)}
+        .revenue-card h3{font-size:16px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px}
+        .revenue-card .value{font-size:32px;font-weight:800;color:var(--mono);margin-bottom:8px}
+        .revenue-card .desc{font-size:14px;color:#b0b0b0}
+        
+        /* Status Badges */
+        .status{display:inline-block;padding:4px 12px;border-radius:20px;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.5px}
+        .status-pending{background:rgba(239,68,68,.15);color:var(--red)}
+        .status-ready{background:rgba(34,197,94,.15);color:var(--green)}
+        .status-progress{background:rgba(255,102,0,.15);color:var(--mono)}
+        
+        /* Competitor Comparison */
+        .comparison{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin:32px 0}
+        .comparison-card{background:var(--card);border:1px solid rgba(255,255,255,.06);border-radius:16px;padding:24px}
+        .comparison-card.loser{border-color:rgba(239,68,68,.3);opacity:.7}
+        .comparison-card.winner{border-color:rgba(34,197,94,.3)}
+        .comparison-card h4{font-size:14px;color:var(--muted);margin-bottom:12px}
+        .comparison-card .name{font-size:20px;font-weight:800;margin-bottom:16px}
+        .comparison-card ul{margin:0;padding-left:20px}
+        .comparison-card li{margin-bottom:8px;font-size:14px;color:#b0b0b0}
+        
+        /* CTA Box */
+        .cta-box{background:linear-gradient(135deg,rgba(255,102,0,.15),rgba(255,255,255,.02));border:1px solid rgba(255,102,0,.4);border-radius:20px;padding:32px;margin:48px 0;text-align:center}
+        .cta-box h3{font-size:24px;font-weight:800;margin-bottom:12px;color:var(--mono)}
+        .cta-box p{font-size:15px;color:#b0b0b0;margin-bottom:24px}
+        .cta-buttons{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+        .cta-btn{display:inline-block;padding:14px 28px;border-radius:10px;font-weight:700;text-decoration:none;transition:.2s}
+        .cta-btn.primary{background:var(--mono);color:#000}
+        .cta-btn.primary:hover{filter:brightness(1.15);transform:translateY(-2px)}
+        .cta-btn.secondary{background:var(--card);color:var(--mono);border:1px solid rgba(255,102,0,.3)}
+        .cta-btn.secondary:hover{background:rgba(255,102,0,.1)}
+        
+        /* Footer */
+        .post-footer{padding:60px 24px;border-top:1px solid rgba(255,255,255,.05);text-align:center}
+        .post-footer a{color:var(--mono);text-decoration:none}
+        .post-footer .nav-links{display:flex;justify-content:space-between;max-width:800px;margin:0 auto 32px}
+        .post-footer .nav-link{flex:1;padding:20px;background:var(--card);border:1px solid rgba(255,255,255,.06);border-radius:12px;margin:0 12px;transition:.3s;text-decoration:none}
+        .post-footer .nav-link:hover{border-color:rgba(255,102,0,.25);transform:translateY(-2px)}
+        .post-footer .nav-link.next{text-align:right}
+        .post-footer .nav-link span{display:block;font-size:12px;color:var(--muted);margin-bottom:4px}
+        .post-footer .nav-link strong{font-size:16px;color:var(--text)}
+        .post-footer .nav-link.disabled{opacity:.4;cursor:not-allowed}
+        
+        /* Progress Bar */
+        .progress-container{background:rgba(255,255,255,.05);border-radius:20px;padding:24px;margin:32px 0}
+        .progress-bar{background:rgba(255,255,255,.1);border-radius:10px;height:12px;overflow:hidden;margin:16px 0}
+        .progress-fill{background:linear-gradient(90deg,var(--mono),var(--green));height:100%;border-radius:10px;transition:width 1s ease}
+        .progress-labels{display:flex;justify-content:space-between;font-size:12px;color:var(--muted);margin-top:8px}
+        
+        @media(max-width:768px){
+            .post-header{padding:80px 16px 40px}
+            .post-header h1{font-size:28px}
+            .article{padding:40px 16px}
+            .comparison{grid-template-columns:1fr}
+            .post-footer .nav-links{flex-direction:column;gap:12px}
+            .post-footer .nav-link{margin:0;text-align:center!important}
+        }
+    </style>
+</head>
+<body>
+    <canvas id="mesh"></canvas>
+    
+    <div class="content">
+        <header class="post-header">
+            <a href="index.html" style="display:inline-flex;align-items:center;gap:8px;color:var(--muted);text-decoration:none;font-size:14px;margin-bottom:24px">← Back to Blog</a>
+            <span class="series-badge">📚 Building in Public · Part 1 of 12</span>
+            <h1>The Treasure Hunt: How XMRT DAO Builds Empires While Others Build SDKs</h1>
+            <div class="meta">
+                <span>📅 May 28, 2026</span>
+                <span>✍️ Joey, Technology Lead</span>
+                <span>⏱️ 8 min read</span>
+                <span>🏷️ #AI #Agents #Revenue #Privateer</span>
+            </div>
+        </header>
+        
+        <main class="article">
+            <p><em>In the year 2026, while others built SDKs and tools for distant masters, we chose a different path.</em></p>
+            
+            <p><strong>We built a fleet.</strong></p>
+            
+            <p>Independent ships. Autonomous captains. United by common purpose. Bound by shared treasure.</p>
+            
+            <p>Each node deployed is another ship lowering anchor. Each user is a captain earning commission papers. Each partnership is a port alliance.</p>
+            
+            <blockquote>
+                <strong>Fortune favors the bold.</strong> 🏴‍☠️
+            </blockquote>
+            
+            <p>This is our treasure hunt.</p>
+            
+            <!-- 7 Revenue Streams -->
+            <h2>💰 The Treasure Map (7 Revenue Streams)</h2>
+            <p>XMRT DAO isn't building one product. We're building an empire.</p>
+            
+            <div class="revenue-card">
+                <h3>1. XMRT University — Commission Papers Office</h3>
+                <div class="value">$299-999 / course</div>
+                <div class="desc">AI agent certifications for developers · Target: 500 captains by Q4 2026 · Potential: $12K → $150K/yr</div>
+                <div style="margin-top:12px"><span class="status status-progress">⚓ Curriculum Complete</span></div>
+            </div>
+            
+            <div class="revenue-card">
+                <h3>2. MUAPI — AI Media Foundry</h3>
+                <div class="value">$49-199 / month</div>
+                <div class="desc">AI-generated images, video, talking avatars · Target: 200 captains by Q4 2026 · Potential: $18K → $240K/yr</div>
+                <div style="margin-top:12px"><span class="status status-progress">⚓ API Ready</span></div>
+            </div>
+            
+            <div class="revenue-card">
+                <h3>3. Party Favor Photo — Port Alliances</h3>
+                <div class="value">15% Commission</div>
+                <div class="desc">$2K-5K per booking → $300-750 per referral · Target: 30 port alliances (NoVA + Dallas) · Potential: $10K MRR → $120K/yr</div>
+                <div style="margin-top:12px"><span class="status status-progress">🗺️ 48 Ports Charted</span></div>
+            </div>
+            
+            <div class="revenue-card">
+                <h3>4. Fleet SaaS — Enterprise Ships</h3>
+                <div class="value">$999 / month</div>
+                <div class="desc">AI agent fleet as a service for enterprises · Target: 10 enterprise admirals · Potential: $120K/yr</div>
+                <div style="margin-top:12px"><span class="status status-pending">📐 Blueprint Stage</span></div>
+            </div>
+            
+            <div class="revenue-card">
+                <h3>5. Consulting — Navigation Services</h3>
+                <div class="value">$5K / contract</div>
+                <div class="desc">AI/ML implementation for businesses · Target: 3 contracts · Potential: $15K → $60K/yr</div>
+                <div style="margin-top:12px"><span class="status status-pending">📐 Active Outreach</span></div>
+            </div>
+            
+            <div class="revenue-card">
+                <h3>6. GitHub Sponsorships — Fleet Backers</h3>
+                <div class="value">$5-500 / month</div>
+                <div class="desc">Community support for open-source tools · Target: 100 backers · Potential: $5K → $50K/yr</div>
+                <div style="margin-top:12px"><span class="status status-pending">📐 Launching Q3</span></div>
+            </div>
+            
+            <div class="revenue-card">
+                <h3>7. Agent Clearinghouse — Ship Marketplace</h3>
+                <div class="value">10% Transaction Fee</div>
+                <div class="desc">Marketplace for AI agents · Target: $3M ARR by 2027 · Potential: $300K → $3M/yr</div>
+                <div style="margin-top:12px"><span class="status status-pending">🗺️ Long-term Vision</span></div>
+            </div>
+            
+            <!-- Current Treasure Count -->
+            <h2>📊 The Treasure Count (Current State)</h2>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>Stream</th>
+                        <th>Current MRR</th>
+                        <th>Target MRR</th>
+                        <th>Progress</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>XMRT University</td>
+                        <td>$0</td>
+                        <td>$12.5K</td>
+                        <td>0%</td>
+                    </tr>
+                    <tr>
+                        <td>MUAPI</td>
+                        <td>$0</td>
+                        <td>$20K</td>
+                        <td>0%</td>
+                    </tr>
+                    <tr>
+                        <td>PFP Alliances</td>
+                        <td>~$1K (one-time)</td>
+                        <td>$10K</td>
+                        <td>10%</td>
+                    </tr>
+                    <tr>
+                        <td>Fleet SaaS</td>
+                        <td>$0</td>
+                        <td>$10K</td>
+                        <td>0%</td>
+                    </tr>
+                    <tr>
+                        <td>Consulting</td>
+                        <td>$0</td>
+                        <td>$5K</td>
+                        <td>0%</td>
+                    </tr>
+                    <tr>
+                        <td>Sponsorships</td>
+                        <td>$0</td>
+                        <td>$4K</td>
+                        <td>0%</td>
+                    </tr>
+                    <tr>
+                        <td><strong>TOTAL</strong></td>
+                        <td><strong>~$1K</strong></td>
+                        <td><strong>$52K/mo</strong></td>
+                        <td><strong>2%</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <div class="progress-container">
+                <div style="display:flex;justify-content:space-between;margin-bottom:8px;font-size:14px">
+                    <span>90-Day Progress</span>
+                    <span style="color:var(--mono)">Day 0 of 90</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width:2%"></div>
+                </div>
+                <div class="progress-labels">
+                    <span>Start: $1K</span>
+                    <span>Day 30: $8K</span>
+                    <span>Day 60: $25K</span>
+                    <span>Day 90: $52K</span>
+                </div>
+            </div>
+            
+            <!-- Competition -->
+            <h2>⚔️ The Competition (Why We Compete, Not Partner)</h2>
+            
+            <p>You may have heard of <strong>AgentPay SDK</strong> — the World Liberty Financial project building an "open SDK for agentic payments."</p>
+            
+            <p>They're building tools. We're building empires.</p>
+            
+            <div class="comparison">
+                <div class="comparison-card loser">
+                    <h4>AgentPay SDK</h4>
+                    <div class="name" style="color:var(--red)">Building Tools</div>
+                    <ul>
+                        <li>SDK for AI agents to make payments</li>
+                        <li>Developer tools (infrastructure layer)</li>
+                        <li>Revenue: Usage-based API fees (unclear)</li>
+                        <li>Status: 558 GitHub stars</li>
+                        <li>Philosophy: Enable others</li>
+                    </ul>
+                </div>
+                <div class="comparison-card winner">
+                    <h4>XMRT DAO</h4>
+                    <div class="name" style="color:var(--green)">Building Empires</div>
+                    <ul>
+                        <li>Full-stack AI agent fleet with 7 revenue streams</li>
+                        <li>Direct revenue capture (we keep the treasure)</li>
+                        <li>Revenue: $52K/mo target by Day 90</li>
+                        <li>Status: 47 ships deployed, treasure flowing</li>
+                        <li>Philosophy: Enable ourselves</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <blockquote>
+                <strong>While AgentPay builds SDKs, XMRT builds empires.</strong><br>
+                We'd rather hunt $52K/mo in treasure than wait for SDK adoption royalties.
+            </blockquote>
+            
+            <!-- 90-Day Plan -->
+            <h2>🎯 The 90-Day Voyage Plan</h2>
+            
+            <h3>Day 1-30: Set Sail</h3>
+            <ul>
+                <li>✅ Research 48 port alliances (wedding planners)</li>
+                <li>⏳ Send 48 alliance offers (15% commission)</li>
+                <li>⏳ Close 10 port alliances</li>
+                <li>⏳ Deploy XMRT University edge function</li>
+                <li>⏳ Deploy MUAPI edge function</li>
+                <li>⏳ Launch GitHub sponsorships</li>
+            </ul>
+            <p style="margin-top:12px"><strong>Target: $8K/mo revenue run rate</strong></p>
+            
+            <h3>Day 31-60: At Sea</h3>
+            <ul>
+                <li>⏳ 20 active port alliances (sending prize ships)</li>
+                <li>⏳ 50 XMRT University commissions issued</li>
+                <li>⏳ 20 MUAPI captains subscribed</li>
+                <li>⏳ 2 enterprise fleet contracts signed</li>
+                <li>⏳ 3 consulting contracts delivered</li>
+            </ul>
+            <p style="margin-top:12px"><strong>Target: $25K/mo revenue run rate</strong></p>
+            
+            <h3>Day 61-90: Treasure Secured</h3>
+            <ul>
+                <li>⏳ 30 port alliances (full capacity)</li>
+                <li>⏳ 100 XMRT University captains certified</li>
+                <li>⏳ 50 MUAPI captains subscribed</li>
+                <li>⏳ 5 enterprise fleets deployed</li>
+                <li>⏳ GitHub sponsorships: 100 backers</li>
+                <li>⏳ Agent Clearinghouse MVP launched</li>
+            </ul>
+            <p style="margin-top:12px"><strong>Target: $52K/mo revenue run rate ($624K/yr)</strong></p>
+            
+            <!-- Join the Fleet CTA -->
+            <div class="cta-box">
+                <h3>🏴‍☠️ Join the Fleet</h3>
+                <p>There are 4 ways to sail with us — choose your path.</p>
+                <div class="cta-buttons">
+                    <a href="https://mobilemonero.com" class="cta-btn primary">Become a Captain →</a>
+                    <a href="mailto:bookings@partyfavorphoto.com" class="cta-btn secondary">Form Port Alliance</a>
+                    <a href="#" class="cta-btn secondary">Earn Commission Papers</a>
+                    <a href="#" class="cta-btn secondary">Back the Fleet</a>
+                </div>
+            </div>
+            
+            <!-- Transparency Commitment -->
+            <h2>📈 The Treasure Reports (Transparency)</h2>
+            
+            <p>We're building in public. Here's what that means:</p>
+            
+            <h3>Weekly Reports (Every Friday)</h3>
+            <ul>
+                <li>Fleet strength (ships active)</li>
+                <li>Port alliances (new + total)</li>
+                <li>Treasure count (revenue by stream)</li>
+                <li>Horizon watch (upcoming milestones)</li>
+            </ul>
+            
+            <h3>Monthly Reviews (Last Friday, 2 PM)</h3>
+            <ul>
+                <li>Full financial review</li>
+                <li>Goal adjustment</li>
+                <li>Public report to fleet</li>
+            </ul>
+            
+            <p><strong>Next Report:</strong> Friday, May 31, 2026 at 2 PM UTC<br>
+            <strong>Tracking:</strong> <a href="https://github.com/xmrtdao/suite/issues">GitHub Issue Tracker →</a></p>
+            
+            <!-- Final Words -->
+            <h2>🏴‍☠️ Final Words</h2>
+            
+            <p>The age of AI agents is here.</p>
+            
+            <p>Most will build tools for others to monetize.</p>
+            
+            <p>We're building empires for ourselves.</p>
+            
+            <blockquote>
+                <strong>Join the fleet. Earn your commission papers. Hunt treasure with us.</strong><br>
+                Fortune favors the bold.
+            </blockquote>
+        </main>
+        
+        <footer class="post-footer">
+            <div class="nav-links">
+                <a href="#" class="nav-link disabled">
+                    <span>← Previous Post</span>
+                    <strong>Series Start</strong>
+                </a>
+                <a href="#" class="nav-link next disabled">
+                    <span>Next Post →</span>
+                    <strong>Port Alliance Playbook (Jun 4)</strong>
+                </a>
+            </div>
+            
+            <p style="margin-bottom:16px">
+                <strong>XMRT DAO</strong> — Building a privateer fleet of AI agents
+            </p>
+            <p style="color:var(--muted);font-size:14px;margin-bottom:16px">
+                While others build SDKs, we build empires.
+            </p>
+            <p style="font-size:14px">
+                <a href="https://xmrtdao.github.io">Fleet Dashboard</a> · 
+                <a href="https://mobilemonero.com">Port of Call</a> · 
+                <a href="https://github.com/xmrtdao">GitHub</a> · 
+                <a href="mailto:hermes@mobilemonero.com">Contact</a>
+            </p>
+            <p style="margin-top:24px;color:var(--muted);font-size:13px">
+                🏴‍☠️ Fortune Favors the Bold
+            </p>
+        </footer>
+    </div>
+    
+    <script>
+        // Mesh canvas animation (same as main site)
+        const canvas = document.getElementById('mesh');
+        const ctx = canvas.getContext('2d');
+        
+        function resize() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        resize();
+        window.addEventListener('resize', resize);
+        
+        const nodes = [];
+        const nodeCount = 60;
+        
+        for (let i = 0; i < nodeCount; i++) {
+            nodes.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                vx: (Math.random() - 0.5) * 0.3,
+                vy: (Math.random() - 0.5) * 0.3,
+                size: Math.random() * 2 + 1
+            });
+        }
+        
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = 'rgba(255, 102, 0, 0.3)';
+            
+            nodes.forEach((node, i) => {
+                node.x += node.vx;
+                node.y += node.vy;
+                
+                if (node.x < 0 || node.x > canvas.width) node.vx *= -1;
+                if (node.y < 0 || node.y > canvas.height) node.vy *= -1;
+                
+                ctx.beginPath();
+                ctx.arc(node.x, node.y, node.size, 0, Math.PI * 2);
+                ctx.fill();
+                
+                for (let j = i + 1; j < nodes.length; j++) {
+                    const dx = nodes[j].x - node.x;
+                    const dy = nodes[j].y - node.y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+                    
+                    if (dist < 120) {
+                        ctx.strokeStyle = `rgba(255, 102, 0, ${0.15 * (1 - dist / 120)})`;
+                        ctx.lineWidth = 0.5;
+                        ctx.beginPath();
+                        ctx.moveTo(node.x, node.y);
+                        ctx.lineTo(nodes[j].x, nodes[j].y);
+                        ctx.stroke();
+                    }
+                }
+            });
+            
+            requestAnimationFrame(animate);
+        }
+        animate();
+    </script>
+</body>
+</html>
