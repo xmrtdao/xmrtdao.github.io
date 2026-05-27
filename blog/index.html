@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="description" content="XMRT DAO Blog — Building in Public. Treasure hunts, fleet updates, and privateer intelligence.">
+    <meta name="theme-color" content="#ff6600">
+    <meta property="og:title" content="XMRT DAO Blog — Building in Public">
+    <meta property="og:description" content="Treasure hunts, fleet updates, and privateer intelligence.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://xmrtdao.github.io/assets/og-image.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@xmrtdao">
+    <link rel="icon" href="../assets/xmrtdao.png">
+    <link rel="apple-touch-icon" href="../assets/xmrtdao.png">
+    <title>XMRT DAO Blog — Building in Public</title>
+    <style>
+        :root{--bg:#030303;--mono:#ff6600;--green:#22c55e;--red:#ef4444;--muted:#666;--text:#e8e8e8;--card:rgba(255,255,255,.03);--purple:#a78bfa;--teal:#4ade80}
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;min-height:100vh}
+        canvas{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none}
+        .content{position:relative;z-index:10}
+        
+        /* Header */
+        .blog-header{padding:80px 24px 60px;text-align:center;border-bottom:1px solid rgba(255,255,255,.05)}
+        .blog-header h1{font-size:48px;font-weight:900;letter-spacing:-2px;margin-bottom:12px}
+        .blog-header h1 span{color:var(--mono)}
+        .blog-header p{font-size:18px;color:var(--muted);max-width:600px;margin:0 auto}
+        .back-link{display:inline-flex;align-items:center;gap:8px;color:var(--muted);text-decoration:none;font-size:14px;margin-bottom:24px;transition:.2s}
+        .back-link:hover{color:var(--mono)}
+        
+        /* Featured Post */
+        .featured{padding:60px 24px;max-width:900px;margin:0 auto}
+        .featured-card{background:linear-gradient(135deg,rgba(255,102,0,.1),rgba(255,255,255,.02));border:1px solid rgba(255,102,0,.3);border-radius:20px;padding:40px;transition:.3s;position:relative;overflow:hidden}
+        .featured-card::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--mono),transparent)}
+        .featured-card:hover{transform:translateY(-4px);border-color:rgba(255,102,0,.5)}
+        .featured-badge{display:inline-block;background:var(--mono);color:#000;padding:4px 12px;border-radius:20px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-bottom:16px}
+        .featured-card h2{font-size:32px;font-weight:800;margin-bottom:16px;line-height:1.2}
+        .featured-card .meta{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:20px;font-size:13px;color:var(--muted)}
+        .featured-card .meta span{display:flex;align-items:center;gap:6px}
+        .featured-card .excerpt{font-size:16px;line-height:1.7;color:#b0b0b0;margin-bottom:24px}
+        .featured-card .tags{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px}
+        .tag{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);padding:4px 12px;border-radius:20px;font-size:12px;color:var(--muted)}
+        .read-more{display:inline-block;background:var(--mono);color:#000;padding:14px 28px;border-radius:10px;font-weight:700;text-decoration:none;transition:.2s}
+        .read-more:hover{filter:brightness(1.15);transform:translateY(-2px);text-decoration:none}
+        
+        /* Posts Grid */
+        .posts-section{padding:60px 24px;max-width:1100px;margin:0 auto}
+        .section-title{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--mono);margin-bottom:32px;display:flex;align-items:center;gap:10px}
+        .section-title::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,rgba(255,102,0,.3),transparent)}
+        .posts-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:20px}
+        .post-card{background:var(--card);border:1px solid rgba(255,255,255,.06);border-radius:16px;padding:24px;transition:.3s;opacity:0;transform:translateY(30px)}
+        .post-card.visible{opacity:1;transform:translateY(0)}
+        .post-card:hover{border-color:rgba(255,102,0,.25);transform:translateY(-4px)}
+        .post-card h3{font-size:20px;font-weight:700;margin-bottom:12px;line-height:1.3}
+        .post-card .excerpt{font-size:14px;color:#b0b0b0;line-height:1.6;margin-bottom:16px}
+        .post-card .meta{display:flex;gap:12px;font-size:12px;color:var(--muted);margin-bottom:16px}
+        .post-card .tags{display:flex;gap:6px;flex-wrap:wrap}
+        .post-link{display:block;color:var(--mono);text-decoration:none;font-weight:600;font-size:14px;margin-top:16px}
+        .post-link:hover{text-decoration:underline}
+        
+        /* Series Badge */
+        .series-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(167,139,250,.1);border:1px solid rgba(167,139,250,.3);padding:4px 12px;border-radius:20px;font-size:11px;color:var(--purple);margin-bottom:12px}
+        
+        /* Revenue Tracker */
+        .revenue-tracker{background:rgba(34,197,94,.05);border:1px solid rgba(34,197,94,.2);border-radius:16px;padding:24px;margin-top:40px}
+        .revenue-tracker h4{font-size:14px;color:var(--green);margin-bottom:16px;text-transform:uppercase;letter-spacing:.5px}
+        .revenue-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:16px}
+        .revenue-stat{background:rgba(255,255,255,.02);border-radius:12px;padding:16px;text-align:center}
+        .revenue-stat .value{font-size:24px;font-weight:800;color:var(--green);margin-bottom:4px}
+        .revenue-stat .label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px}
+        
+        /* Footer */
+        .blog-footer{padding:60px 24px;border-top:1px solid rgba(255,255,255,.05);text-align:center;color:var(--muted);font-size:14px}
+        .blog-footer a{color:var(--mono);text-decoration:none}
+        .blog-footer a:hover{text-decoration:underline}
+        
+        /* Animations */
+        @keyframes pulse-glow{0%,100%{box-shadow:0 0 40px rgba(255,102,0,.3)}50%{box-shadow:0 0 60px rgba(255,102,0,.5)}}
+        @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+        
+        /* Responsive */
+        @media(max-width:768px){
+            .blog-header{padding:60px 16px 40px}
+            .blog-header h1{font-size:32px}
+            .featured-card{padding:24px}
+            .featured-card h2{font-size:24px}
+            .posts-grid{grid-template-columns:1fr}
+        }
+    </style>
+</head>
+<body>
+    <canvas id="mesh"></canvas>
+    
+    <div class="content">
+        <header class="blog-header">
+            <a href="https://xmrtdao.github.io" class="back-link">← Back to Fleet Dashboard</a>
+            <h1>XMRT <span>DAO</span> Blog</h1>
+            <p>Building in public. Treasure hunts, fleet updates, and privateer intelligence.</p>
+        </header>
+        
+        <main>
+            <!-- Featured Post -->
+            <section class="featured">
+                <div class="featured-card">
+                    <span class="featured-badge">🏴‍☠️ Featured</span>
+                    <span class="series-badge">📚 Building in Public · Part 1 of 12</span>
+                    <h2>The Treasure Hunt: How XMRT DAO Builds Empires While Others Build SDKs</h2>
+                    <div class="meta">
+                        <span>📅 May 28, 2026</span>
+                        <span>✍️ Joey, Tech Lead</span>
+                        <span>⏱️ 8 min read</span>
+                    </div>
+                    <div class="tags">
+                        <span class="tag">#AI</span>
+                        <span class="tag">#Agents</span>
+                        <span class="tag">#Revenue</span>
+                        <span class="tag">#Privateer</span>
+                    </div>
+                    <p class="excerpt">
+                        In the year 2026, while others built SDKs and tools for distant masters, we chose a different path. 
+                        We built a fleet. Independent ships. Autonomous captains. United by common purpose. Bound by shared treasure. 
+                        This is our treasure hunt — 7 revenue streams, $52K/mo target, 90 days to prove the privateer model works.
+                    </p>
+                    <a href="treasure-hunt.html" class="read-more">Read Full Post →</a>
+                    
+                    <!-- Live Revenue Tracker -->
+                    <div class="revenue-tracker">
+                        <h4>💰 Live Treasure Count (90-Day Hunt)</h4>
+                        <div class="revenue-grid">
+                            <div class="revenue-stat">
+                                <div class="value" id="current-mrr">$1K</div>
+                                <div class="label">Current MRR</div>
+                            </div>
+                            <div class="revenue-stat">
+                                <div class="value" id="day-30">$8K</div>
+                                <div class="label">Day 30 Target</div>
+                            </div>
+                            <div class="revenue-stat">
+                                <div class="value" id="day-60">$25K</div>
+                                <div class="label">Day 60 Target</div>
+                            </div>
+                            <div class="revenue-stat">
+                                <div class="value" id="day-90">$52K</div>
+                                <div class="label">Day 90 Target</div>
+                            </div>
+                        </div>
+                        <div style="margin-top:16px;font-size:12px;color:var(--muted);text-align:center">
+                            📊 Next report: Friday, May 31, 2026 at 2 PM UTC
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- All Posts -->
+            <section class="posts-section">
+                <div class="section-title">All Posts</div>
+                <div class="posts-grid">
+                    <!-- Post 1 -->
+                    <article class="post-card">
+                        <span class="series-badge">📚 Building in Public · Part 1</span>
+                        <h3>The Treasure Hunt: How XMRT DAO Builds Empires</h3>
+                        <div class="meta">
+                            <span>📅 May 28, 2026</span>
+                            <span>⏱️ 8 min</span>
+                        </div>
+                        <p class="excerpt">
+                            While others build SDKs, we build empires. Follow our 90-day hunt for $52K/mo across 7 revenue streams.
+                        </p>
+                        <div class="tags">
+                            <span class="tag">#AI</span>
+                            <span class="tag">#Revenue</span>
+                        </div>
+                        <a href="treasure-hunt.html" class="post-link">Read Post →</a>
+                    </article>
+                    
+                    <!-- Post 2 (Coming Soon) -->
+                    <article class="post-card" style="opacity:.6">
+                        <span class="series-badge" style="background:rgba(102,102,102,.1);border-color:rgba(102,102,102,.3);color:var(--muted)">📚 Building in Public · Part 2</span>
+                        <h3 style="color:var(--muted)">Port Alliance Playbook (Coming Jun 4)</h3>
+                        <div class="meta">
+                            <span>📅 June 4, 2026</span>
+                            <span>⏱️ TBD</span>
+                        </div>
+                        <p class="excerpt" style="color:var(--muted)">
+                            How we're forming 30 wedding planner partnerships in NoVA + Dallas. Email templates, commission structures, and conversion tactics.
+                        </p>
+                        <div class="tags">
+                            <span class="tag" style="opacity:.5">#Partnerships</span>
+                            <span class="tag" style="opacity:.5">#PFP</span>
+                        </div>
+                        <span class="post-link" style="color:var(--muted);cursor:not-allowed">Coming Soon 🔒</span>
+                    </article>
+                    
+                    <!-- Post 3 (Coming Soon) -->
+                    <article class="post-card" style="opacity:.6">
+                        <span class="series-badge" style="background:rgba(102,102,102,.1);border-color:rgba(102,102,102,.3);color:var(--muted)">📚 Building in Public · Part 3</span>
+                        <h3 style="color:var(--muted)">Commission Papers: XMRT University Launch (Coming Jun 11)</h3>
+                        <div class="meta">
+                            <span>📅 June 11, 2026</span>
+                            <span>⏱️ TBD</span>
+                        </div>
+                        <p class="excerpt" style="color:var(--muted)">
+                            Inside our AI agent certification program. 6 modules, security screening, JWT certificates, and the path from midshipman to captain.
+                        </p>
+                        <div class="tags">
+                            <span class="tag" style="opacity:.5">#Education</span>
+                            <span class="tag" style="opacity:.5">#Certification</span>
+                        </div>
+                        <span class="post-link" style="color:var(--muted);cursor:not-allowed">Coming Soon 🔒</span>
+                    </article>
+                </div>
+            </section>
+            
+            <!-- Subscribe CTA -->
+            <section class="featured" style="padding-bottom:80px">
+                <div class="featured-card" style="background:linear-gradient(135deg,rgba(167,139,250,.1),rgba(255,255,255,.02));border-color:rgba(167,139,250,.3)">
+                    <h2 style="font-size:28px;margin-bottom:12px">📬 Join the Fleet Newsletter</h2>
+                    <p style="color:#b0b0b0;margin-bottom:24px">
+                        Weekly treasure reports, fleet updates, and privateer intelligence. 
+                        No spam, no VC pitches — just building in public.
+                    </p>
+                    <div style="display:flex;gap:12px;flex-wrap:wrap;max-width:500px">
+                        <input type="email" placeholder="captain@example.com" style="flex:1;min-width:200px;padding:14px 18px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;color:var(--text);font-size:14px">
+                        <button class="read-more" style="border:none;cursor:pointer">Join Fleet →</button>
+                    </div>
+                </div>
+            </section>
+        </main>
+        
+        <footer class="blog-footer">
+            <p style="margin-bottom:12px">
+                <strong>XMRT DAO</strong> — Building a privateer fleet of AI agents
+            </p>
+            <p style="margin-bottom:16px;color:var(--muted)">
+                While others build SDKs, we build empires.
+            </p>
+            <p>
+                <a href="https://xmrtdao.github.io">Fleet Dashboard</a> · 
+                <a href="https://mobilemonero.com">Port of Call</a> · 
+                <a href="https://github.com/xmrtdao">GitHub</a> · 
+                <a href="mailto:hermes@mobilemonero.com">Contact</a>
+            </p>
+            <p style="margin-top:16px;font-size:12px;color:var(--muted)">
+                🏴‍☠️ Fortune Favors the Bold
+            </p>
+        </footer>
+    </div>
+    
+    <script>
+        // Mesh canvas animation (same as main site)
+        const canvas = document.getElementById('mesh');
+        const ctx = canvas.getContext('2d');
+        
+        function resize() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        resize();
+        window.addEventListener('resize', resize);
+        
+        const nodes = [];
+        const nodeCount = 60;
+        
+        for (let i = 0; i < nodeCount; i++) {
+            nodes.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                vx: (Math.random() - 0.5) * 0.3,
+                vy: (Math.random() - 0.5) * 0.3,
+                size: Math.random() * 2 + 1
+            });
+        }
+        
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = 'rgba(255, 102, 0, 0.3)';
+            
+            nodes.forEach((node, i) => {
+                node.x += node.vx;
+                node.y += node.vy;
+                
+                if (node.x < 0 || node.x > canvas.width) node.vx *= -1;
+                if (node.y < 0 || node.y > canvas.height) node.vy *= -1;
+                
+                ctx.beginPath();
+                ctx.arc(node.x, node.y, node.size, 0, Math.PI * 2);
+                ctx.fill();
+                
+                for (let j = i + 1; j < nodes.length; j++) {
+                    const dx = nodes[j].x - node.x;
+                    const dy = nodes[j].y - node.y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+                    
+                    if (dist < 120) {
+                        ctx.strokeStyle = `rgba(255, 102, 0, ${0.15 * (1 - dist / 120)})`;
+                        ctx.lineWidth = 0.5;
+                        ctx.beginPath();
+                        ctx.moveTo(node.x, node.y);
+                        ctx.lineTo(nodes[j].x, nodes[j].y);
+                        ctx.stroke();
+                    }
+                }
+            });
+            
+            requestAnimationFrame(animate);
+        }
+        animate();
+        
+        // Scroll animations
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        document.querySelectorAll('.post-card').forEach(card => observer.observe(card));
+    </script>
+</body>
+</html>
