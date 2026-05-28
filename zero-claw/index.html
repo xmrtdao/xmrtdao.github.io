@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zero-Claw | Encrypted Chat for Attorneys - XMRT DAO</title>
+    <meta name="description" content="The only chat platform that can't be subpoenaed. Zero-knowledge encryption for attorney-client privilege. ABA Model Rule 1.6 compliant.">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --bg-dark: #030303;
+            --bg-card: #0a0a0a;
+            --accent: #ff6600;
+            --accent-glow: rgba(255, 102, 0, 0.3);
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0a0;
+            --border: #1a1a1a;
+            --success: #00ff88;
+            --warning: #ffaa00;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(3, 3, 3, 0.95);
+            border-bottom: 1px solid var(--border);
+            padding: 1rem 2rem;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            align-items: center;
+        }
+        
+        nav a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.3s;
+            font-size: 0.9rem;
+        }
+        
+        nav a:hover {
+            color: var(--accent);
+        }
+        
+        nav .logo {
+            font-weight: 700;
+            color: var(--text-primary);
+            font-size: 1.2rem;
+        }
+        
+        nav .logo span {
+            color: var(--accent);
+        }
+        
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 8rem 2rem 4rem;
+            background: radial-gradient(ellipse at center, #0a0a0a 0%, #030303 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+            animation: pulse 4s ease-in-out infinite;
+            opacity: 0.3;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.3; }
+            50% { transform: scale(1.1); opacity: 0.5; }
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #fff 0%, var(--accent) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .hero .tagline {
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+        
+        .hero .motto {
+            font-size: 1.2rem;
+            color: var(--accent);
+            font-style: italic;
+            margin-bottom: 3rem;
+        }
+        
+        .hero-cta {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: inline-block;
+        }
+        
+        .btn-primary {
+            background: var(--accent);
+            color: #fff;
+            border: 2px solid var(--accent);
+        }
+        
+        .btn-primary:hover {
+            background: transparent;
+            color: var(--accent);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-primary);
+            border: 2px solid var(--border);
+        }
+        
+        .btn-secondary:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+        
+        /* Features Grid */
+        .features {
+            padding: 6rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .section-subtitle {
+            text-align: center;
+            color: var(--text-secondary);
+            margin-bottom: 4rem;
+            font-size: 1.1rem;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .feature-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 2rem;
+            transition: all 0.3s;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent);
+            box-shadow: 0 10px 40px var(--accent-glow);
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .feature-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .feature-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+        
+        /* Security Section */
+        .security {
+            padding: 6rem 2rem;
+            background: var(--bg-card);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .security-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .security-item {
+            text-align: center;
+            padding: 2rem;
+        }
+        
+        .security-item .check {
+            font-size: 2rem;
+            color: var(--success);
+            margin-bottom: 1rem;
+        }
+        
+        /* Pricing */
+        .pricing {
+            padding: 6rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+        
+        .pricing-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 2.5rem 2rem;
+            text-align: center;
+            transition: all 0.3s;
+            position: relative;
+        }
+        
+        .pricing-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-5px);
+        }
+        
+        .pricing-card.featured {
+            border-color: var(--accent);
+            box-shadow: 0 0 40px var(--accent-glow);
+        }
+        
+        .pricing-card.featured::before {
+            content: 'MOST POPULAR';
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--accent);
+            color: #fff;
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+        
+        .pricing-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .pricing-card .price {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+        
+        .pricing-card .period {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+        }
+        
+        .pricing-card ul {
+            list-style: none;
+            text-align: left;
+            margin-bottom: 2rem;
+        }
+        
+        .pricing-card li {
+            padding: 0.5rem 0;
+            color: var(--text-secondary);
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .pricing-card li:last-child {
+            border-bottom: none;
+        }
+        
+        /* Expo Section */
+        .expo {
+            padding: 6rem 2rem;
+            background: var(--bg-card);
+            border-top: 1px solid var(--border);
+        }
+        
+        .expo-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .expo-card {
+            background: var(--bg-dark);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1.5rem;
+        }
+        
+        .expo-card h4 {
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+        
+        .expo-card p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        
+        /* Hardware Section */
+        .hardware {
+            padding: 6rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .hardware-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .hardware-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 2rem;
+        }
+        
+        .hardware-card.winner {
+            border-color: var(--success);
+            box-shadow: 0 0 30px rgba(0, 255, 136, 0.2);
+        }
+        
+        .hardware-card.winner::before {
+            content: '🏆 BEST VALUE';
+            display: block;
+            color: var(--success);
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        
+        .hardware-card h3 {
+            margin-bottom: 1rem;
+        }
+        
+        .hardware-card .specs {
+            list-style: none;
+            margin-bottom: 1.5rem;
+        }
+        
+        .hardware-card .specs li {
+            padding: 0.3rem 0;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        
+        .hardware-card .price {
+            font-size: 1.5rem;
+            color: var(--accent);
+            font-weight: 700;
+        }
+        
+        /* Contact Section */
+        .contact {
+            padding: 6rem 2rem;
+            background: var(--bg-card);
+            border-top: 1px solid var(--border);
+            text-align: center;
+        }
+        
+        .contact-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .contact-content h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .contact-content p {
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+        
+        /* Footer */
+        footer {
+            padding: 3rem 2rem;
+            text-align: center;
+            border-top: 1px solid var(--border);
+            color: var(--text-secondary);
+        }
+        
+        footer a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero .tagline {
+                font-size: 1.2rem;
+            }
+            
+            nav ul {
+                gap: 1rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <ul>
+            <li class="logo">XMRT<span>DAO</span></li>
+            <li><a href="#features">Features</a></li>
+            <li><a href="#security">Security</a></li>
+            <li><a href="#pricing">Pricing</a></li>
+            <li><a href="#expo">Expos</a></li>
+            <li><a href="#hardware">Hardware</a></li>
+            <li><a href="https://github.com/xmrtdao/zero-claw" target="_blank">GitHub</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Zero-Claw</h1>
+            <p class="tagline">The Only Chat Platform That Can't Be Subpoenaed</p>
+            <p class="motto">🏴‍☠️ Zero Knowledge. Zero Logs. Zero Risk.</p>
+            <div class="hero-cta">
+                <a href="https://github.com/xmrtdao/zero-claw" class="btn btn-primary">View on GitHub</a>
+                <a href="#features" class="btn btn-secondary">Learn More</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <h2 class="section-title">Built for Attorney-Client Privilege</h2>
+        <p class="section-subtitle">ABA Model Rule 1.6 compliant encrypted chat designed for law firms</p>
+        
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">🔐</div>
+                <h3>Zero-Knowledge Encryption</h3>
+                <p>Not even server admins can read your messages. End-to-end encrypted with Fernet AES-128 + HKDF key derivation.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">✅</div>
+                <h3>ABA Model Rule 1.6 Compliant</h3>
+                <p>Meets "reasonable efforts" requirement for client confidentiality. Ethics opinion filing in progress.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">📊</div>
+                <h3>Audit Trail (No Content)</h3>
+                <p>Timestamped logs for compliance without message content. Prove communication occurred without revealing what was said.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">💥</div>
+                <h3>Self-Destructing Messages</h3>
+                <p>Auto-delete after matter closure. Messages wiped from RAM on disconnect - nothing persists to disk.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">🔑</div>
+                <h3>SRP-6a Authentication</h3>
+                <p>Password NEVER transmitted. Zero-knowledge proof authentication prevents MITM attacks and credential theft.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">⚖️</div>
+                <h3>Privilege Protection</h3>
+                <p>Cannot be subpoenaed from server - no logs exist to produce. Literally impossible to comply with data requests.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Security Section -->
+    <section class="security" id="security">
+        <h2 class="section-title">Threat Model</h2>
+        <p class="section-subtitle">Every attack vector mitigated by design</p>
+        
+        <div class="security-grid">
+            <div class="security-item">
+                <div class="check">✅</div>
+                <h4>Network Eavesdropper</h4>
+                <p>E2E encryption</p>
+            </div>
+            
+            <div class="security-item">
+                <div class="check">✅</div>
+                <h4>Compromised Relay</h4>
+                <p>Server cannot decrypt</p>
+            </div>
+            
+            <div class="security-item">
+                <div class="check">✅</div>
+                <h4>Server Subpoena</h4>
+                <p>No logs to produce</p>
+            </div>
+            
+            <div class="security-item">
+                <div class="check">✅</div>
+                <h4>MITM Attack</h4>
+                <p>SRP mutual auth</p>
+            </div>
+            
+            <div class="security-item">
+                <div class="check">✅</div>
+                <h4>Memory Forensics</h4>
+                <p>Keys wiped on disconnect</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="pricing" id="pricing">
+        <h2 class="section-title">Pricing Tiers</h2>
+        <p class="section-subtitle">Built for firms of all sizes</p>
+        
+        <div class="pricing-grid">
+            <div class="pricing-card">
+                <h3>Solo</h3>
+                <div class="price">Free</div>
+                <div class="period">forever</div>
+                <ul>
+                    <li>1 attorney</li>
+                    <li>5 clients</li>
+                    <li>30-day logs</li>
+                    <li>Basic support</li>
+                </ul>
+                <a href="https://github.com/xmrtdao/zero-claw" class="btn btn-secondary">Get Started</a>
+            </div>
+            
+            <div class="pricing-card featured">
+                <h3>Small Firm</h3>
+                <div class="price">$99</div>
+                <div class="period">per month</div>
+                <ul>
+                    <li>10 attorneys</li>
+                    <li>Unlimited clients</li>
+                    <li>90-day logs</li>
+                    <li>Priority support</li>
+                    <li>ABA compliance docs</li>
+                </ul>
+                <a href="mailto:hermes@mobilemonero.com" class="btn btn-primary">Contact Us</a>
+            </div>
+            
+            <div class="pricing-card">
+                <h3>Enterprise</h3>
+                <div class="price">$499</div>
+                <div class="period">per month</div>
+                <ul>
+                    <li>Unlimited attorneys</li>
+                    <li>Unlimited clients</li>
+                    <li>Custom retention</li>
+                    <li>SSO integration</li>
+                    <li>Dedicated support</li>
+                    <li>Custom deployment</li>
+                </ul>
+                <a href="mailto:hermes@mobilemonero.com" class="btn btn-secondary">Contact Us</a>
+            </div>
+            
+            <div class="pricing-card">
+                <h3>Legal Aid</h3>
+                <div class="price">Free</div>
+                <div class="period">forever</div>
+                <ul>
+                    <li>Same as Small Firm</li>
+                    <li>Public defenders</li>
+                    <li>Legal aid societies</li>
+                    <li>Pro bono clinics</li>
+                </ul>
+                <a href="mailto:hermes@mobilemonero.com" class="btn btn-secondary">Apply Now</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Expo Section -->
+    <section class="expo" id="expo">
+        <h2 class="section-title">Find Us at Legal Tech Expos</h2>
+        <p class="section-subtitle">Live demos at major legal technology conferences</p>
+        
+        <div class="expo-grid">
+            <div class="expo-card">
+                <h4>🔴 ABA TechShow</h4>
+                <p>March 2026 • Chicago, IL</p>
+                <p>contact@americanbar.org</p>
+            </div>
+            
+            <div class="expo-card">
+                <h4>🔴 Clio Con</h4>
+                <p>October 2026 • New Orleans, LA</p>
+                <p>events@clio.com</p>
+            </div>
+            
+            <div class="expo-card">
+                <h4>🟡 Legalweek</h4>
+                <p>February 2026 • New York, NY</p>
+                <p>events@alm.com</p>
+            </div>
+            
+            <div class="expo-card">
+                <h4>🟡 ILTA Annual</h4>
+                <p>August 2026 • Las Vegas, NV</p>
+                <p>info@iltanet.org</p>
+            </div>
+            
+            <div class="expo-card">
+                <h4>🟡 Legal Tech Conf (NYSBA)</h4>
+                <p>January 2026 • New York, NY</p>
+                <p>legaltech@nysba.org</p>
+            </div>
+            
+            <div class="expo-card">
+                <h4>+7 More Expos</h4>
+                <p>See full list on GitHub</p>
+                <p>12 total expos planned</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Hardware Section -->
+    <section class="hardware" id="hardware">
+        <h2 class="section-title">Production Hardware</h2>
+        <p class="section-subtitle">Recommended deployment configurations</p>
+        
+        <div class="hardware-grid">
+            <div class="hardware-card winner">
+                <h3>🏆 Hetzner CPX51</h3>
+                <ul class="specs">
+                    <li>8 vCPU (AMD Ryzen)</li>
+                    <li>16GB DDR4 RAM</li>
+                    <li>240GB SSD</li>
+                    <li>500+ concurrent users</li>
+                    <li>EU data centers (GDPR)</li>
+                </ul>
+                <div class="price">$27/mo</div>
+                <p style="color: var(--text-secondary); margin-top: 1rem; font-size: 0.9rem;">Best value for small-mid firms</p>
+            </div>
+            
+            <div class="hardware-card">
+                <h3>Linode Dedicated</h3>
+                <ul class="specs">
+                    <li>8 vCPU</li>
+                    <li>8GB RAM</li>
+                    <li>160GB SSD</li>
+                    <li>US data centers</li>
+                    <li>SOC 2 Type II</li>
+                </ul>
+                <div class="price">$40/mo</div>
+                <p style="color: var(--text-secondary); margin-top: 1rem; font-size: 0.9rem;">US data sovereignty</p>
+            </div>
+            
+            <div class="hardware-card">
+                <h3>AWS Multi-AZ</h3>
+                <ul class="specs">
+                    <li>Auto-scaling</li>
+                    <li>Multi-region</li>
+                    <li>Enterprise SLA</li>
+                    <li>AWS compliance</li>
+                    <li>24/7 support</li>
+                </ul>
+                <div class="price">$800-1,500/mo</div>
+                <p style="color: var(--text-secondary); margin-top: 1rem; font-size: 0.9rem;">Enterprise deployment</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact">
+        <div class="contact-content">
+            <h2>Ready to Secure Your Practice?</h2>
+            <p>Join the fleet. Protect attorney-client privilege. Can't be subpoenaed.</p>
+            <div class="hero-cta">
+                <a href="https://github.com/xmrtdao/zero-claw" class="btn btn-primary">View on GitHub</a>
+                <a href="mailto:hermes@mobilemonero.com" class="btn btn-secondary">Contact Fleet</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>🏴‍☠️ <strong>Fortune Favors the Bold</strong></p>
+        <p style="margin-top: 1rem; font-size: 0.9rem;">
+            Part of <a href="https://xmrtdao.github.io">XMRT DAO</a> • 
+            <a href="https://github.com/xmrtdao/zero-claw">GitHub</a> • 
+            <a href="mailto:hermes@mobilemonero.com">Contact</a>
+        </p>
+    </footer>
+
+    <script>
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
