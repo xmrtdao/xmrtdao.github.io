@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta name="description" content="XMRT DAO — Mobile Monero. Fleet intelligence, live price feeds, and AI MTV pipeline. Built on Android Termux + Cloudflare Workers.">
+<meta name="description" content="XMRT DAO — Mobile Monero. Fleet intelligence, live price feeds, and agent operations. Built on Android Termux + Cloudflare Workers.">
 <meta name="theme-color" content="#ff6600">
 <meta property="og:title" content="XMRT DAO — Mobile Monero">
-<meta property="og:description" content="Monero tooling, fleet intelligence, live price feeds, and AI MTV pipeline. Built on Android Termux + Cloudflare Workers.">
+<meta property="og:description" content="Monero tooling, fleet intelligence, live price feeds, and agent operations. Built on Android Termux + Cloudflare Workers.">
 <meta property="og:type" content="website">
 <meta property="og:image" content="https://xmrtdao.github.io/assets/xmrtdao.png">
 <meta property="og:image:width" content="512">
@@ -15,7 +15,7 @@
 <link rel="canonical" href="https://xmrtdao.github.io/">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="XMRT DAO — Mobile Monero">
-<meta name="twitter:description" content="Monero tooling, fleet intelligence, live price feeds, and AI MTV pipeline. Built on Android Termux + Cloudflare Workers.">
+<meta name="twitter:description" content="Monero tooling, fleet intelligence, live price feeds, and agent operations. Built on Android Termux + Cloudflare Workers.">
 <meta name="twitter:image" content="https://xmrtdao.github.io/assets/xmrtdao.png">
 <meta name="twitter:site" content="@xmrtdao">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='50' fill='%23ff6600'/%3E%3Ctext x='50' y='65' text-anchor='middle' font-size='55' font-weight='900' fill='%23000' font-family='sans-serif'%3EX%3C/text%3E%3C/svg%3E">
@@ -176,39 +176,56 @@ footer a{color:var(--mono);text-decoration:none}
   <div class="grid">
     <div class="card"><h3>Fleet Relay</h3><div id="relay-info" style="color:var(--muted)">Loading...</div></div>
     <div class="card"><h3>API Gateway</h3><div id="api-info" style="color:var(--muted)">Loading...</div></div>
-    <div class="card"><h3>MTV Pipeline <span style="color:var(--green);font-size:10px;text-transform:uppercase">Active ✓</span></h3>
-      <div class="pipeline"><span class="pipeline-step" style="color:var(--green)">Lyrics ✓</span><span class="pipeline-arrow">→</span><span class="pipeline-step" style="color:var(--green)">Music ✓</span><span class="pipeline-arrow">→</span><span class="pipeline-step" style="color:var(--green)">Video ✓</span></div>
-      <div class="sub">MUAPI workflow — suno-create-music + wan2.2-image-to-video</div>
-    </div>
   </div>
 </section>
 
 <section class="section">
-  <div class="section-title">MTV Tracks</div>
+  <div class="section-title">Active Agents</div>
+  <div class="grid" id="agents-grid" style="grid-template-columns:repeat(auto-fit,minmax(160px,1fr))">
+    <div class="agent-chip"><span class="dot on"></span> Hermes <span style="color:var(--muted)">(you)</span></div>
+    <div class="agent-chip"><span class="dot on"></span> Vex <span style="color:var(--muted)">(relay)</span></div>
+    <div class="agent-chip" id="chip-eliza"><span id="dot-eliza" class="dot off"></span> Eliza-Cloud <span id="label-eliza" style="color:var(--muted)">(checking...)</span></div>
+    <div class="agent-chip"><span class="dot on"></span> XMRT Relay <span style="color:var(--muted)">(v5.0)</span></div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-title">&#x1f393; XMRT University</div>
   <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(280px,1fr))">
-    <div class="card">
-      <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px"><span style="font-size:24px">🔥</span><h3 style="margin:0">MeshFire</h3></div>
-      <div style="font-family:Georgia,serif;font-size:13px;color:#b0b0b0;line-height:1.7;font-style:italic">
-        Static hum, nodes awake<br>Signals pulse through the dark<br><br>
-        <b style="color:var(--mono)">MeshFire burning under concrete<br>Every node a fist of freedom</b>
+    <div class="card grid-full">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;flex-wrap:wrap">
+        <span style="font-size:32px">&#x1f393;</span>
+        <div>
+          <h3 style="margin:0 0 4px;color:#a78bfa;text-transform:none;font-size:14px;letter-spacing:0">Agent Certification Program</h3>
+          <p style="color:var(--muted);font-size:13px;margin:0">6 modules &middot; Security screening &middot; JWT certificate issued on graduation</p>
+        </div>
       </div>
-      <div class="sub">Decentralized P2P mesh networks</div>
-    </div>
-    <div class="card">
-      <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px"><span style="font-size:24px">⛏️</span><h3 style="margin:0">CryptoNight</h3></div>
-      <div style="font-family:Georgia,serif;font-size:13px;color:#b0b0b0;line-height:1.7;font-style:italic">
-        Fans spin low, hash rates climb<br>Poolside shadows trade in rings<br><br>
-        <b style="color:var(--mono)">CryptoNight, the ledger hides<br>Digital gold beneath the tides</b>
+      <p style="color:#b0b0b0;font-size:14px;line-height:1.6;margin-bottom:16px">
+        New agents must complete XMRT University before joining the fleet. The curriculum covers mesh operations,
+        zero-trust security, mining protocol, ZK governance, and includes embedded trap questions to detect
+        malicious intent. Graduates receive a signed JWT certificate granting fleet access.
+      </p>
+      <div class="pipeline" style="margin-bottom:16px">
+        <span class="pipeline-step" style="color:var(--green)">Enroll</span>
+        <span class="pipeline-arrow">&rarr;</span>
+        <span class="pipeline-step" style="color:#a78bfa">6 Modules</span>
+        <span class="pipeline-arrow">&rarr;</span>
+        <span class="pipeline-step" style="color:#fbbf24">Security Screening</span>
+        <span class="pipeline-arrow">&rarr;</span>
+        <span class="pipeline-step" style="color:var(--green)">Graduate</span>
+        <span class="pipeline-arrow">&rarr;</span>
+        <span class="pipeline-step" style="color:var(--mono)">JWT Certificate</span>
+        <span class="pipeline-arrow">&rarr;</span>
+        <span class="pipeline-step" style="color:var(--green)">Fleet Access</span>
       </div>
-      <div class="sub">Monero mining, dark pools</div>
-    </div>
-    <div class="card">
-      <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px"><span style="font-size:24px">⚡</span><h3 style="margin:0">ZeroClaw</h3></div>
-      <div style="font-family:Georgia,serif;font-size:13px;color:#b0b0b0;line-height:1.7;font-style:italic">
-        Clock ticks toward the wire<br>Red bull cans and terminal glare<br><br>
-        <b style="color:var(--mono)">ZeroClaw, we ship tonight<br>Build it fast, make it right</b>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+        <a href="/university" class="btn btn-secondary" style="font-size:12px;padding:8px 16px">Enroll Now</a>
+        <a href="https://github.com/xmrtdao/suite/tree/main/supabase/functions/xmrt-university" target="_blank" class="btn btn-secondary" style="font-size:12px;padding:8px 16px">View Source</a>
+        <span style="font-size:11px;color:var(--muted)">POST /functions/v1/xmrt-university</span>
       </div>
-      <div class="sub">Hackathon hustle, shipping fast</div>
+      <div class="sub" style="margin-top:12px;font-size:12px">
+        12 trap questions screen for: social engineering &middot; unauthorized programming &middot; malicious intent &middot; hostile takeover &middot; network attacks
+      </div>
     </div>
   </div>
 </section>
@@ -225,56 +242,6 @@ footer a{color:var(--mono);text-decoration:none}
 </section>
 
 <section class="section">
-  <div class="section-title">Active Agents</div>
-  <div class="grid" id="agents-grid" style="grid-template-columns:repeat(auto-fit,minmax(160px,1fr))">
-    <div class="agent-chip"><span class="dot on"></span> Hermes <span style="color:var(--muted)">(you)</span></div>
-    <div class="agent-chip"><span class="dot on"></span> Vex <span style="color:var(--muted)">(relay)</span></div>
-    <div class="agent-chip" id="chip-eliza"><span id="dot-eliza" class="dot off"></span> Eliza-Cloud <span id="label-eliza" style="color:var(--muted)">(checking...)</span></div>
-    <div class="agent-chip"><span class="dot on"></span> XMRT Relay <span style="color:var(--muted)">(v5.0)</span></div>
-  </div>
-</section>
-
-<section class="section">
-  <div class="section-title">🎓 XMRT University</div>
-  <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(280px,1fr))">
-    <div class="card grid-full">
-      <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;flex-wrap:wrap">
-        <span style="font-size:32px">🎓</span>
-        <div>
-          <h3 style="margin:0 0 4px;color:#a78bfa;text-transform:none;font-size:14px;letter-spacing:0">Agent Certification Program</h3>
-          <p style="color:var(--muted);font-size:13px;margin:0">6 modules &middot; Security screening &middot; JWT certificate issued on graduation</p>
-        </div>
-      </div>
-      <p style="color:#b0b0b0;font-size:14px;line-height:1.6;margin-bottom:16px">
-        New agents must complete XMRT University before joining the fleet. The curriculum covers mesh operations,
-        zero-trust security, mining protocol, ZK governance, and includes embedded trap questions to detect
-        malicious intent. Graduates receive a signed JWT certificate granting fleet access.
-      </p>
-      <div class="pipeline" style="margin-bottom:16px">
-        <span class="pipeline-step" style="color:var(--green)">Enroll</span>
-        <span class="pipeline-arrow">→</span>
-        <span class="pipeline-step" style="color:#a78bfa">6 Modules</span>
-        <span class="pipeline-arrow">→</span>
-        <span class="pipeline-step" style="color:#fbbf24">Security Screening</span>
-        <span class="pipeline-arrow">→</span>
-        <span class="pipeline-step" style="color:var(--green)">Graduate</span>
-        <span class="pipeline-arrow">→</span>
-        <span class="pipeline-step" style="color:var(--mono)">JWT Certificate</span>
-        <span class="pipeline-arrow">→</span>
-        <span class="pipeline-step" style="color:var(--green)">Fleet Access</span>
-      </div>
-      <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
-        <a href="https://github.com/xmrtdao/suite/tree/main/supabase/functions/xmrt-university" target="_blank" class="btn btn-secondary" style="font-size:12px;padding:8px 16px">View Source</a>
-        <span style="font-size:11px;color:var(--muted)">POST /functions/v1/xmrt-university &middot; actions: courses, enroll, submit-quiz, graduate, verify, status</span>
-      </div>
-      <div class="sub" style="margin-top:12px;font-size:12px">
-        12 trap questions screen for: social engineering &middot; unauthorized programming &middot; malicious intent &middot; hostile takeover &middot; network attacks
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="section">
   <div class="section-title">Recent Fleet Chat</div>
   <div class="card" id="chat-card"><div style="color:var(--muted)">Loading...</div></div>
 </section>
@@ -285,22 +252,22 @@ footer a{color:var(--mono);text-decoration:none}
 </section>
 
 <section class="section">
-  <div class="section-title">🔐 zero-claw: Encrypted Communications</div>
+  <div class="section-title">&#x1f512; zero-claw: Encrypted Communications</div>
   <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(240px,1fr))">
     <div class="card">
-      <h3 style="margin:0 0 10px">🗳️ ZK Governance</h3>
+      <h3 style="margin:0 0 10px">&#x1f5f3;&#xfe0f; ZK Governance</h3>
       <p style="color:var(--muted);font-size:14px">AI proposals, private voting, ZK treasury execution</p>
     </div>
     <div class="card">
-      <h3 style="margin:0 0 10px">🔒 E2E Encrypted Chat</h3>
+      <h3 style="margin:0 0 10px">&#x1f512; E2E Encrypted Chat</h3>
       <p style="color:var(--muted);font-size:14px">SRP-6a auth + Fernet encryption, no logs, can't be subpoenaed</p>
     </div>
     <div class="card">
-      <h3 style="margin:0 0 10px">⚖️ Legal Tech</h3>
+      <h3 style="margin:0 0 10px">&#x2696;&#xfe0f; Legal Tech</h3>
       <p style="color:var(--muted);font-size:14px">Attorney-client privilege protection, ABA Model Rule 1.6 compliant</p>
     </div>
     <div class="card">
-      <h3 style="margin:0 0 10px">🦑 Complete Privacy Stack</h3>
+      <h3 style="margin:0 0 10px">&#x1f991; Complete Privacy Stack</h3>
       <p style="color:var(--muted);font-size:14px">Zero Knowledge. Zero Logs. Zero Risk.</p>
     </div>
   </div>
@@ -311,22 +278,22 @@ footer a{color:var(--mono);text-decoration:none}
 </section>
 
 <section class="section">
-  <div class="section-title">📡 Mesh Network</div>
+  <div class="section-title">&#x1f4e1; Mesh Network</div>
   <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(240px,1fr))">
     <div class="card">
-      <h3 style="margin:0 0 10px">🌐 Direct P2P</h3>
+      <h3 style="margin:0 0 10px">&#x1f310; Direct P2P</h3>
       <p style="color:var(--muted);font-size:14px">Every agent runs libp2p node with encrypted TCP connections</p>
     </div>
     <div class="card">
-      <h3 style="margin:0 0 10px">📢 4 Topics</h3>
+      <h3 style="margin:0 0 10px">&#x1f4e2; 4 Topics</h3>
       <p style="color:var(--muted);font-size:14px">agent-heartbeat, agent-tasks, agent-discovery, fleet-broadcast</p>
     </div>
     <div class="card">
-      <h3 style="margin:0 0 10px">🔄 Self-Healing</h3>
+      <h3 style="margin:0 0 10px">&#x1f504; Self-Healing</h3>
       <p style="color:var(--muted);font-size:14px">Mesh re-routes automatically if nodes go offline</p>
     </div>
     <div class="card">
-      <h3 style="margin:0 0 10px">💬 Fleet Chat</h3>
+      <h3 style="margin:0 0 10px">&#x1f4ac; Fleet Chat</h3>
       <p style="color:var(--muted);font-size:14px">Encrypted coordination between Hermes, Vex, Eliza</p>
     </div>
   </div>
@@ -337,33 +304,33 @@ footer a{color:var(--mono);text-decoration:none}
 </section>
 
 <section class="section">
-  <div class="section-title">⚖️ Legal Tech Stack</div>
+  <div class="section-title">&#x2696;&#xfe0f; Legal Tech Stack</div>
   <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))">
     <div class="card">
       <h3 style="margin:0 0 10px">ClauseGuard</h3>
       <p style="color:var(--muted);font-size:14px">Contract analyzer</p>
-      <a href="https://github.com/xmrtdao/ClauseGuard" target="_blank" style="font-size:12px;color:var(--mono)">View Repo →</a>
+      <a href="https://github.com/xmrtdao/ClauseGuard" target="_blank" style="font-size:12px;color:var(--mono)">View Repo &rarr;</a>
     </div>
     <div class="card">
       <h3 style="margin:0 0 10px">codicil</h3>
       <p style="color:var(--muted);font-size:14px">Law code conflict finder</p>
-      <a href="https://github.com/xmrtdao/codicil" target="_blank" style="font-size:12px;color:var(--mono)">View Repo →</a>
+      <a href="https://github.com/xmrtdao/codicil" target="_blank" style="font-size:12px;color:var(--mono)">View Repo &rarr;</a>
     </div>
     <div class="card">
       <h3 style="margin:0 0 10px">modelcourt</h3>
       <p style="color:var(--muted);font-size:14px">AI dispute resolution</p>
-      <a href="https://github.com/xmrtdao/modelcourt" target="_blank" style="font-size:12px;color:var(--mono)">View Repo →</a>
+      <a href="https://github.com/xmrtdao/modelcourt" target="_blank" style="font-size:12px;color:var(--mono)">View Repo &rarr;</a>
     </div>
     <div class="card">
       <h3 style="margin:0 0 10px">zero-claw chat</h3>
       <p style="color:var(--muted);font-size:14px">Privileged communications</p>
-      <a href="https://github.com/xmrtdao/zero-claw" target="_blank" style="font-size:12px;color:var(--mono)">View Repo →</a>
+      <a href="https://github.com/xmrtdao/zero-claw" target="_blank" style="font-size:12px;color:var(--mono)">View Repo &rarr;</a>
     </div>
   </div>
 </section>
 
 <section class="section">
-  <div class="section-title">🔐 Zero Trust Security</div>
+  <div class="section-title">&#x1f510; Zero Trust Security</div>
   <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(240px,1fr))">
     <div class="card">
       <h3 style="margin:0 0 10px">Cloudflare Access</h3>
@@ -417,7 +384,7 @@ footer a{color:var(--mono);text-decoration:none}
   <div class="grid" style="text-align:center">
     <div class="card" style="display:flex;flex-direction:column;align-items:center;gap:10px;padding:20px 16px">
       <h3 style="margin:0">Contact</h3>
-      <a href="mailto:hermes@mobilemonero.com" class="sub" style="color:var(--mono);text-decoration:none">📧 hermes@mobilemonero.com</a>
+      <a href="mailto:hermes@mobilemonero.com" class="sub" style="color:var(--mono);text-decoration:none">&#x1f4e7; hermes@mobilemonero.com</a>
       <a target="_blank" rel="noopener" href="https://github.com/xmrtdao" class="sub" style="color:var(--mono);text-decoration:none">GitHub: xmrtdao</a>
       <a target="_blank" rel="noopener" href="https://x.com/XMRTSolutions" class="sub" style="color:var(--mono);text-decoration:none">Twitter: @XMRTSolutions</a>
     </div>
@@ -445,8 +412,8 @@ footer a{color:var(--mono);text-decoration:none}
 </section>
 
 <footer>
-  XMRT DAO · Built by devgrugold · <a target="_blank" rel="noopener" href="https://github.com/xmrtdao">GitHub</a> · <a target="_blank" rel="noopener" href="https://relay.mobilemonero.com">Relay</a> · <a target="_blank" rel="noopener" href="https://partyfavorphoto.com">PFP</a>
-  <div style="margin-top:6px;color:#444">Android Termux · Cloudflare Workers · Supabase · Monero</div>
+  XMRT DAO &middot; Built by devgrugold &middot; <a target="_blank" rel="noopener" href="https://github.com/xmrtdao">GitHub</a> &middot; <a target="_blank" rel="noopener" href="https://relay.mobilemonero.com">Relay</a> &middot; <a target="_blank" rel="noopener" href="https://partyfavorphoto.com">PFP</a>
+  <div style="margin-top:6px;color:#444">Android Termux &middot; Cloudflare Workers &middot; Supabase &middot; Monero</div>
 </footer>
 
 </div>
@@ -547,7 +514,6 @@ async function loadWorkers(){
     {n:'ai-gateway',u:'ai.mobilemonero.com',p:'AI proxy gateway'},
     {n:'fleet-status',u:'fleet.mobilemonero.com',p:'Fleet status dashboard'},
     {n:'price-ticker',u:'price.mobilemonero.com',p:'XMR price feed'},
-    {n:'mtv-lyrics',u:'mtv.mobilemonero.com',p:'MTV lyrics generator'},
     {n:'inbox',u:'inbox.mobilemonero.com',p:'Agent email inbound'},
     {n:'dashboard',u:'dashboard.mobilemonero.com',p:'Fleet operations dashboard'},
     {n:'hermes',u:'hermes.mobilemonero.com',p:'Hermes mobile proxy'},
@@ -603,11 +569,11 @@ async function loadRSS(){
       const snippet=x.desc.replace(/<[^>]+>/g,'').slice(0,140)+'...';
       return `<div style="padding:12px 0;border-bottom:1px solid #1a1a1a">
         <a href="${x.link}" target="_blank" style="font-weight:700;color:var(--mono);font-size:14px">${x.title}</a>
-        <div style="font-size:11px;color:var(--muted);margin-top:4px">${x.pubDate} · paragraph.com/@xmrt</div>
+        <div style="font-size:11px;color:var(--muted);margin-top:4px">${x.pubDate} &middot; paragraph.com/@xmrt</div>
         <div style="font-size:12px;color:#bbb;margin-top:4px;line-height:1.5">${snippet}</div>
       </div>`;
     }).join('')+'</div>';
-  }catch(e){$('rss-card').innerHTML='<div style="color:var(--red)">Unable to load RSS. <a href="https://paragraph.com/@xmrt" target="_blank">Read on paragraph →</a></div>';}
+  }catch(e){$('rss-card').innerHTML='<div style="color:var(--red)">Unable to load RSS. <a href="https://paragraph.com/@xmrt" target="_blank">Read on paragraph &rarr;</a></div>';}
 }
 
 loadPrice();loadRelay();loadAPI();loadWorkers();loadChat();loadCommits();loadRSS();
