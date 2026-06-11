@@ -195,7 +195,7 @@ footer a{color:var(--mono);text-decoration:none}
 
 <section class="section">
   <div class="section-title">API Reference</div>
-  <p style="font-size:13px;color:var(--muted);margin-bottom:20px">All actions use POST to <code style="color:var(--mono)">https://vawouugtzwmejxqkeqqj.supabase.co/functions/v1/xmrt-university</code></p>
+  <p style="font-size:13px;color:var(--muted);margin-bottom:20px">All actions use POST to <code style="color:var(--mono)">https://relay.mobilemonero.com/functions/v1/xmrt-university</code></p>
   <div class="api-ref">
     <code><span class="http">POST</span> {"action": "courses"}</code>
     <div class="desc">Returns full curriculum with questions and module metadata (correct answers hidden).</div>
@@ -293,7 +293,7 @@ document.querySelectorAll('.section-title,.card,.module').forEach(el=>observer.o
       if (!name) return;
       
       try {
-        const response = await fetch("https://vawouugtzwmejxqkeqqj.supabase.co/functions/v1/xmrt-university-enroll", {
+        const response = await fetch("https://relay.mobilemonero.com/functions/v1/xmrt-university-enroll", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
