@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zero-Claw Legal Workflow - BPMN Diagram</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap');
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'JetBrains Mono', monospace;
+      background: #020617;
+      color: #e2e8f0;
+      padding: 2rem;
+      min-height: 100vh;
+    }
+    
+    .header {
+      max-width: 1400px;
+      margin: 0 auto 2rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid #1e293b;
+    }
+    
+    .header h1 {
+      font-size: 1.5rem;
+      color: #22d3ee;
+      margin-bottom: 0.5rem;
+    }
+    
+    .header .subtitle {
+      font-size: 0.875rem;
+      color: #64748b;
+    }
+    
+    .diagram-container {
+      max-width: 1400px;
+      margin: 0 auto 2rem;
+      background: #0f172a;
+      border: 1px solid #1e293b;
+      border-radius: 8px;
+      padding: 2rem;
+      overflow-x: auto;
+    }
+    
+    .cards {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1rem;
+    }
+    
+    .card {
+      background: #0f172a;
+      border: 1px solid #1e293b;
+      border-radius: 6px;
+      padding: 1.25rem;
+    }
+    
+    .card-header {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.75rem;
+    }
+    
+    .card-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+    
+    .card-dot.cyan { background: #22d3ee; }
+    .card-dot.emerald { background: #34d399; }
+    .card-dot.violet { background: #a78bfa; }
+    .card-dot.amber { background: #fbbf24; }
+    .card-dot.rose { background: #fb7185; }
+    
+    .card h3 {
+      font-size: 0.875rem;
+      color: #e2e8f0;
+    }
+    
+    .card ul {
+      list-style: none;
+      font-size: 0.75rem;
+      color: #94a3b8;
+    }
+    
+    .card li {
+      padding: 0.25rem 0;
+    }
+    
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+    
+    .footer {
+      max-width: 1400px;
+      margin: 2rem auto 0;
+      padding-top: 1rem;
+      border-top: 1px solid #1e293b;
+      font-size: 0.75rem;
+      color: #64748b;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>⚖️ Zero-Claw Legal Workflow - BPMN 2.0</h1>
+    <div class="subtitle">ABA Model Rule 1.6 Compliant Attorney-Client Encrypted Chat + Document Intelligence + ModelCourt Tribunal</div>
+  </div>
+  
+  <div class="diagram-container">
+    <svg viewBox="0 0 1400 900" xmlns="http://www.w3.org/2000/svg">
+      <!-- Background Grid -->
+      <defs>
+        <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+          <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#1e293b" stroke-width="0.5"/>
+        </pattern>
+        <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+          <polygon points="0 0, 10 3.5, 0 7" fill="#64748b"/>
+        </marker>
+        <marker id="arrowhead-emerald" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+          <polygon points="0 0, 10 3.5, 0 7" fill="#34d399"/>
+        </marker>
+        <marker id="arrowhead-amber" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+          <polygon points="0 0, 10 3.5, 0 7" fill="#fbbf24"/>
+        </marker>
+        <marker id="arrowhead-rose" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+          <polygon points="0 0, 10 3.5, 0 7" fill="#fb7185"/>
+        </marker>
+        <marker id="arrowhead-violet" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+          <polygon points="0 0, 10 3.5, 0 7" fill="#a78bfa"/>
+        </marker>
+      </defs>
+      
+      <rect width="1400" height="900" fill="url(#grid)"/>
+      
+      <!-- POOL: Client (Attorney/Law Firm) -->
+      <g id="pool-client">
+        <rect x="20" y="40" width="1360" height="120" fill="rgba(30, 41, 59, 0.3)" stroke="#94a3b8" stroke-width="1.5" rx="6"/>
+        <text x="35" y="65" fill="#94a3b8" font-size="11" font-weight="700">POOL: Client (Attorney/Law Firm)</text>
+        
+        <!-- Lane: Attorney -->
+        <line x1="20" y1="100" x2="1380" y2="100" stroke="#1e293b" stroke-width="1" stroke-dasharray="4,4"/>
+        <text x="35" y="120" fill="#64748b" font-size="9">Lane: Attorney (Peter Solinsky, Esq.)</text>
+        
+        <!-- Start Event: Legal Consultation Request -->
+        <circle cx="100" cy="160" r="18" fill="none" stroke="#22d3ee" stroke-width="2"/>
+        <circle cx="100" cy="160" r="12" fill="#22d3ee" opacity="0.3"/>
+        <text x="100" y="195" fill="#94a3b8" font-size="8" text-anchor="middle">Consultation</text>
+        <text x="100" y="205" fill="#94a3b8" font-size="8" text-anchor="middle">Request</text>
+        
+        <!-- Task: Initiate Zero-Claw Chat -->
+        <rect x="180" y="140" width="140" height="60" fill="rgba(8, 51, 68, 0.4)" stroke="#22d3ee" stroke-width="1.5" rx="6"/>
+        <rect x="180" y="140" width="140" height="60" fill="#0f172a" opacity="0.5" rx="6"/>
+        <text x="250" y="165" fill="#e2e8f0" font-size="10" text-anchor="middle" font-weight="700">Initiate</text>
+        <text x="250" y="180" fill="#94a3b8" font-size="8" text-anchor="middle">Zero-Claw Chat</text>
+        
+        <!-- Sequence Flow 1 -->
+        <line x1="118" y1="160" x2="175" y2="160" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+        
+        <!-- Task: Upload Legal Documents -->
+        <rect x="380" y="140" width="140" height="60" fill="rgba(8, 51, 68, 0.4)" stroke="#22d3ee" stroke-width="1.5" rx="6"/>
+        <rect x="380" y="140" width="140" height="60" fill="#0f172a" opacity="0.5" rx="6"/>
+        <text x="450" y="160" fill="#e2e8f0" font-size="10" text-anchor="middle" font-weight="700">Upload</text>
+        <text x="450" y="175" fill="#94a3b8" font-size="8" text-anchor="middle">Documents</text>
+        
+        <!-- Sequence Flow 2 -->
+        <line x1="320" y1="160" x2="375" y2="160" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+        
+        <!-- Intermediate Timer Event: Signature Deadline -->
+        <circle cx="580" cy="160" r="18" fill="none" stroke="#fbbf24" stroke-width="2"/>
+        <circle cx="580" cy="160" r="12" fill="#fbbf24" opacity="0.3"/>
+        <path d="M 575 155 L 580 160 L 585 150" stroke="#fbbf24" stroke-width="1.5" fill="none"/>
+        <text x="580" y="195" fill="#94a3b8" font-size="8" text-anchor="middle">Signature</text>
+        <text x="580" y="205" fill="#94a3b8" font-size="8" text-anchor="middle">Deadline</text>
+        
+        <!-- Sequence Flow 3 -->
+        <line x1="520" y1="160" x2="557" y2="160" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+        
+        <!-- End Event: Receive Legal Opinion -->
+        <circle cx="680" cy="160" r="18" fill="none" stroke="#22d3ee" stroke-width="2"/>
+        <circle cx="680" cy="160" r="14" stroke="#22d3ee" stroke-width="2"/>
+        <text x="680" y="195" fill="#94a3b8" font-size="8" text-anchor="middle">Receive</text>
+        <text x="680" y="205" fill="#94a3b8" font-size="8" text-anchor="middle">Legal Opinion</text>
+        
+        <!-- Sequence Flow 4 -->
+        <line x1="598" y1="160" x2="657" y2="160" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+      </g>
+      
+      <!-- POOL: Zero-Claw System -->
+      <g id="pool-zeroclaw">
+        <rect x="20" y="180" width="1360" height="280" fill="rgba(136, 19, 55, 0.2)" stroke="#fb7185" stroke-width="1.5" rx="6"/>
+        <text x="35" y="205" fill="#fb7185" font-size="11" font-weight="700">POOL: Zero-Claw System (E2E Encrypted - ABA Model Rule 1.6 Compliant)</text>
+        
+        <!-- Lane: Encrypted Chat Interface -->
+        <line x1="20" y1="240" x2="1380" y2="240" stroke="#1e293b" stroke-width="1" stroke-dasharray="4,4"/>
+        <text x="35" y="260" fill="#64748b" font-size="9">Lane: Encrypted Chat (chat.mobilemonero.com)</text>
+        
+        <!-- Start Event: Chat Session Created -->
+        <circle cx="100" cy="300" r="18" fill="none" stroke="#fb7185" stroke-width="2"/>
+        <circle cx="100" cy="300" r="12" fill="#fb7185" opacity="0.3"/>
+        <text x="100" y="335" fill="#94a3b8" font-size="8" text-anchor="middle">Session</text>
+        <text x="100" y="345" fill="#94a3b8" font-size="8" text-anchor="middle">Created</text>
+        
+        <!-- Task: Generate Room ID + Encryption Keys -->
+        <rect x="180" y="280" width="160" height="60" fill="rgba(136, 19, 55, 0.4)" stroke="#fb7185" stroke-width="1.5" rx="6"/>
+        <rect x="180" y="280" width="160" height="60" fill="#0f172a" opacity="0.5" rx="6"/>
+        <text x="260" y="305" fill="#e2e8f0" font-size="9" text-anchor="middle" font-weight="700">Generate Room ID</text>
+        <text x="260" y="320" fill="#94a3b8" font-size="8" text-anchor="middle">+ E2E Keys</text>
+        
+        <!-- Sequence Flow 5 -->
+        <line x1="118" y1="300" x2="175" y2="300" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+        
+        <!-- Task: Invite Participants (Peter Solinsky) -->
+        <rect x="400" y="280" width="160" height="60" fill="rgba(136, 19, 55, 0.4)" stroke="#fb7185" stroke-width="1.5" rx="6"/>
+        <rect x="400" y="280" width="160" height="60" fill="#0f172a" opacity="0.5" rx="6"/>
+        <text x="480" y="300" fill="#e2e8f0" font-size="10" text-anchor="middle" font-weight="700">Invite</text>
+        <text x="480" y="315" fill="#94a3b8" font-size="8" text-anchor="middle">Participants</text>
+        
+        <!-- Sequence Flow 6 -->
+        <line x1="340" y1="300" x2="395" y2="300" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+        
+        <!-- Message Flow to Client -->
+        <line x1="480" y1="280" x2="480" y2="200" stroke="#fb923c" stroke-width="1.5" stroke-dasharray="6,4" marker-end="url(#arrowhead)"/>
+        
+        <!-- Lane: Document Intelligence (PaperHawk) -->
+        <line x1="20" y1="360" x2="1380" y2="360" stroke="#1e293b" stroke-width="1" stroke-dasharray="4,4"/>
+        <text x="35" y="380" fill="#64748b" font-size="9">Lane: PaperHawk Document Intelligence</text>
+        
+        <!-- Intermediate Event: Documents Received -->
+        <circle cx="100" cy="420" r="18" fill="none" stroke="#a78bfa" stroke-width="2"/>
+        <circle cx="100" cy="420" r="10" fill="#a78bfa"/>
+        <text x="100" y="455" fill="#94a3b8" font-size="8" text-anchor="middle">Documents</text>
+        <text x="100" y="465" fill="#94a3b8" font-size="8" text-anchor="middle">Received</text>
+        
+        <!-- Task: Run 14 Statutory Checks -->
+        <rect x="180" y="400" width="180" height="60" fill="rgba(76, 29, 149, 0.4)" stroke="#a78bfa" stroke-width="1.5" rx="6"/>
+        <rect x="180" y="400" width="180" height="60" fill="#0f172a" opacity="0.5" rx="6"/>
+        <text x="270" y="420" fill="#e2e8f0" font-size="9" text-anchor="middle" font-weight="700">14 Statutory</text>
+        <text x="270" y="435" fill="#94a3b8" font-size="8" text-anchor="middle">Compliance Checks</text>
+        
+        <!-- Sequence Flow 7 -->
+        <line x1="118" y1="420" x2="175" y2="420" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+        
+        <!-- Gateway: All Checks Pass? -->
+        <polygon points="420,420 450,390 480,420 450,450" fill="rgba(76, 29, 149, 0.4)" stroke="#a78bfa" stroke-width="1.5"/>
+        <text x="450" y="425" fill="#e2e8f0" font-size="9" text-anchor="middle" font-weight="700">XOR</text>
+        <text x="450" y="455" fill="#94a3b8" font-size="8" text-anchor="middle">Compliant?</text>
+        
+        <!-- Sequence Flow 8 -->
+        <line x1="360" y1="420" x2="417" y2="420" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+        
+        <!-- YES Path: Forward to ModelCourt -->
+        <line x1="480" y1="420" x2="540" y2="420" stroke="#34d399" stroke-width="1.5" marker-end="url(#arrowhead-emerald)"/>
+        <text x="510" y="415" fill="#34d399" font-size="8" text-anchor="middle">Yes</text>
+        
+        <!-- NO Path: Flag Violations -->
+        <line x1="450" y1="450" x2="450" y2="500" stroke="#fb7185" stroke-width="1.5" stroke-dasharray="6,4"/>
+        <line x1="450" y1="500" x2="600" y2="500" stroke="#fb7185" stroke-width="1.5" stroke-dasharray="6,4" marker-end="url(#arrowhead-rose)"/>
+        <text x="460" y="490" fill="#fb7185" font-size="8">No</text>
+        
+        <!-- Task: Generate Violation Report -->
+        <rect x="600" y="480" width="160" height="60" fill="rgba(136, 19, 55, 0.4)" stroke="#fb7185" stroke-width="1.5" rx="6"/>
+        <rect x="600" y="480" width="160" height="60" fill="#0f172a" opacity="0.5" rx="6"/>
+        <text x="680" y="505" fill="#e2e8f0" font-size="10" text-anchor="middle" font-weight="700">Generate</text>
+        <text x="680" y="520" fill="#94a3b8" font-size="8" text-anchor="middle">Violation Report</text>
+        
+        <!-- Statutory Check Labels -->
+        <text x="270" y="475" fill="#64748b" font-size="7" text-anchor="middle">HU VAT Act §169 | ISA 240/320/500 | GDPR Art.28 | Ptk.6:98 | AML Sanctions</text>
+      </g>
+      
+      <!-- POOL: ModelCourt Tribunal -->
+      <g id="pool-modelcourt">
+        <rect x="20" y="480" width="1360" height="280" fill="rgba(6, 78, 59, 0.2)" stroke="#34d399" stroke-width="1.5" rx="6"/>
+        <text x="35" y="505" fill="#34d399" font-size="11" font-weight="700">POOL: ModelCourt 8-Agent Tribunal (AMD MI300X vLLM - Qwen 2.5 14B)</text>
+        
+        <!-- Lane: 8 Agent Judges -->
+        <line x1="20" y1="540" x2="1380" y2="540" stroke="#1e293b" stroke-width="1" stroke-dasharray="4,4"/>
+        <text x="35" y="560" fill="#64748b" font-size="9">Lane: 8 AI Agent Judges (Parallel Analysis)</text>
+        
+        <!-- Task: Agent 1 - Contract Law -->
+        <rect x="100" y="580" width="100" height="50" fill="rgba(6, 78, 59, 0.4)" stroke="#34d399" stroke-width="1.5" rx="4"/>
+        <text x="150" y="605" fill="#e2e8f0" font-size="8" text-anchor="middle" font-weight="700">Contract</text>
+        <text x="150" y="615" fill="#94a3b8" font-size="7" text-anchor="middle">Law</text>
+        
+        <!-- Task: Agent 2 - Tax Law -->
+        <rect x="220" y="580" width="100" height="50" fill="rgba(6, 78, 59, 0.4)" stroke="#34d399" stroke-width="1.5" rx="4"/>
+        <text x="270" y="605" fill="#e2e8f0" font-size="8" text-anchor="middle" font-weight="700">Tax Law</text>
+        <text x="270" y="615" fill="#94a3b8" font-size="7" text-anchor="middle">(HU VAT)</text>
+        
+        <!-- Task: Agent 3 - GDPR -->
+        <rect x="340" y="580" width="100" height="50" fill="rgba(6, 78, 59, 0.4)" stroke="#34d399" stroke-width="1.5" rx="4"/>
+        <text x="390" y="605" fill="#e2e8f0" font-size="8" text-anchor="middle" font-weight="700">GDPR</text>
+        <text x="390" y="615" fill="#94a3b8" font-size="7" text-anchor="middle">Art.28</text>
+        
+        <!-- Task: Agent 4 - AML -->
+        <rect x="460" y="580" width="100" height="50" fill="rgba(6, 78, 59, 0.4)" stroke="#34d399" stroke-width="1.5" rx="4"/>
+        <text x="510" y="605" fill="#e2e8f0" font-size="8" text-anchor="middle" font-weight="700">AML</text>
+        <text x="510" y="615" fill="#94a3b8" font-size="7" text-anchor="middle">Sanctions</text>
+        
+        <!-- Task: Agent 5 - Civil Law -->
+        <rect x="580" y="580" width="100" height="50" fill="rgba(6, 78, 59, 0.4)" stroke="#34d399" stroke-width="1.5" rx="4"/>
+        <text x="630" y="605" fill="#e2e8f0" font-size="8" text-anchor="middle" font-weight="700">Civil Law</text>
+        <text x="630" y="615" fill="#94a3b8" font-size="7" text-anchor="middle">(Ptk.6:98)</text>
+        
+        <!-- Task: Agent 6 - Criminal -->
+        <rect x="700" y="580" width="100" height="50" fill="rgba(6, 78, 59, 0.4)" stroke="#34d399" stroke-width="1.5" rx="4"/>
+        <text x="750" y="605" fill="#e2e8f0" font-size="8" text-anchor="middle" font-weight="700">Criminal</text>
+        <text x="750" y="615" fill="#94a3b8" font-size="7" text-anchor="middle">Law</text>
+        
+        <!-- Task: Agent 7 - Evidence -->
+        <rect x="820" y="580" width="100" height="50" fill="rgba(6, 78, 59, 0.4)" stroke="#34d399" stroke-width="1.5" rx="4"/>
+        <text x="870" y="605" fill="#e2e8f0" font-size="8" text-anchor="middle" font-weight="700">Evidence</text>
+        <text x="870" y="615" fill="#94a3b8" font-size="7" text-anchor="middle">ISA 240</text>
+        
+        <!-- Task: Agent 8 - Ethics -->
+        <rect x="940" y="580" width="100" height="50" fill="rgba(6, 78, 59, 0.4)" stroke="#34d399" stroke-width="1.5" rx="4"/>
+        <text x="990" y="605" fill="#e2e8f0" font-size="8" text-anchor="middle" font-weight="700">Ethics</text>
+        <text x="990" y="615" fill="#94a3b8" font-size="7" text-anchor="middle">ABA Rules</text>
+        
+        <!-- Parallel Gateway: All Agents Complete -->
+        <polygon points="1100,605 1130,575 1160,605 1130,635" fill="rgba(6, 78, 59, 0.4)" stroke="#34d399" stroke-width="1.5"/>
+        <text x="1130" y="610" fill="#e2e8f0" font-size="9" text-anchor="middle" font-weight="700">AND</text>
+        
+        <!-- Sequence Flows from Agents to AND Gateway -->
+        <line x1="200" y1="605" x2="1095" y2="605" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+        
+        <!-- Lane: Chief Judge -->
+        <line x1="20" y1="660" x2="1380" y2="660" stroke="#1e293b" stroke-width="1" stroke-dasharray="4,4"/>
+        <text x="35" y="680" fill="#64748b" font-size="9">Lane: Chief Judge (Final Verdict)</text>
+        
+        <!-- Task: Synthesize Agent Opinions -->
+        <rect x="200" y="700" width="160" height="60" fill="rgba(6, 78, 59, 0.4)" stroke="#34d399" stroke-width="1.5" rx="6"/>
+        <rect x="200" y="700" width="160" height="60" fill="#0f172a" opacity="0.5" rx="6"/>
+        <text x="280" y="725" fill="#e2e8f0" font-size="10" text-anchor="middle" font-weight="700">Synthesize</text>
+        <text x="280" y="740" fill="#94a3b8" font-size="8" text-anchor="middle">8 Agent Opinions</text>
+        
+        <!-- Sequence Flow from AND Gateway -->
+        <line x1="1160" y1="605" x2="1250" y2="605" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+        <line x1="1250" y1="605" x2="1250" y2="730" stroke="#64748b" stroke-width="1.5"/>
+        <line x1="1250" y1="730" x2="365" y2="730" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+        
+        <!-- Gateway: Verdict Reached? -->
+        <polygon points="420,730 450,700 480,730 450,760" fill="rgba(6, 78, 59, 0.4)" stroke="#34d399" stroke-width="1.5"/>
+        <text x="450" y="735" fill="#e2e8f0" font-size="9" text-anchor="middle" font-weight="700">XOR</text>
+        <text x="450" y="765" fill="#94a3b8" font-size="8" text-anchor="middle">Verdict?</text>
+        
+        <!-- Sequence Flow -->
+        <line x1="360" y1="730" x2="417" y2="730" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+        
+        <!-- YES Path: Generate Legal Opinion -->
+        <line x1="480" y1="730" x2="540" y2="730" stroke="#34d399" stroke-width="1.5" marker-end="url(#arrowhead-emerald)"/>
+        <text x="510" y="725" fill="#34d399" font-size="8" text-anchor="middle">Yes</text>
+        
+        <!-- Task: Generate Legal Opinion Document -->
+        <rect x="540" y="710" width="160" height="60" fill="rgba(6, 78, 59, 0.4)" stroke="#34d399" stroke-width="1.5" rx="6"/>
+        <rect x="540" y="710" width="160" height="60" fill="#0f172a" opacity="0.5" rx="6"/>
+        <text x="620" y="735" fill="#e2e8f0" font-size="10" text-anchor="middle" font-weight="700">Generate</text>
+        <text x="620" y="750" fill="#94a3b8" font-size="8" text-anchor="middle">Legal Opinion</text>
+        
+        <!-- End Event: Opinion Delivered -->
+        <circle cx="780" cy="730" r="18" fill="none" stroke="#34d399" stroke-width="2"/>
+        <circle cx="780" cy="730" r="14" stroke="#34d399" stroke-width="2"/>
+        <text x="780" y="765" fill="#94a3b8" font-size="8" text-anchor="middle">Opinion</text>
+        <text x="780" y="775" fill="#94a3b8" font-size="8" text-anchor="middle">Delivered</text>
+        
+        <!-- Sequence Flow -->
+        <line x1="700" y1="730" x2="757" y2="730" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+        
+        <!-- 6-Layer Anti-Hallucination Label -->
+        <text x="620" y="790" fill="#64748b" font-size="7" text-anchor="middle">6-Layer Anti-Hallucination: Citation Enforcement | Source Verification | Confidence Scoring</text>
+      </g>
+      
+      <!-- Message Flows Between Pools -->
+      <!-- Client to Zero-Claw -->
+      <line x1="250" y1="200" x2="250" y2="275" stroke="#fb923c" stroke-width="1.5" stroke-dasharray="6,4" marker-end="url(#arrowhead)"/>
+      
+      <!-- Zero-Claw to ModelCourt -->
+      <line x1="540" y1="420" x2="540" y2="475" stroke="#fb923c" stroke-width="1.5" stroke-dasharray="6,4" marker-end="url(#arrowhead)"/>
+      
+      <!-- ModelCourt to Client -->
+      <line x1="780" y1="760" x2="780" y2="820" stroke="#fb923c" stroke-width="1.5" stroke-dasharray="6,4"/>
+      <line x1="780" y1="820" x2="680" y2="820" stroke="#fb923c" stroke-width="1.5" stroke-dasharray="6,4"/>
+      <line x1="680" y1="820" x2="680" y2="185" stroke="#fb923c" stroke-width="1.5" stroke-dasharray="6,4" marker-end="url(#arrowhead)"/>
+      
+      <!-- Legend -->
+      <g id="legend" transform="translate(20, 820)">
+        <rect width="600" height="70" fill="#0f172a" stroke="#1e293b" stroke-width="1" rx="6"/>
+        <text x="15" y="20" fill="#64748b" font-size="9" font-weight="700">BPMN LEGEND</text>
+        
+        <circle cx="30" cy="38" r="7" fill="none" stroke="#22d3ee" stroke-width="1.5"/>
+        <text x="42" y="42" fill="#94a3b8" font-size="8">Start Event</text>
+        
+        <circle cx="130" cy="38" r="7" fill="none" stroke="#22d3ee" stroke-width="1.5"/>
+        <circle cx="130" cy="38" r="5" stroke="#22d3ee" stroke-width="1.5"/>
+        <text x="145" y="42" fill="#94a3b8" font-size="8">End Event</text>
+        
+        <circle cx="245" cy="38" r="7" fill="none" stroke="#fbbf24" stroke-width="1.5"/>
+        <path d="M 240 33 L 245 38 L 250 30" stroke="#fbbf24" stroke-width="1.2" fill="none"/>
+        <text x="257" y="42" fill="#94a3b8" font-size="8">Timer Event</text>
+        
+        <rect x="340" y="33" width="18" height="10" fill="rgba(6, 78, 59, 0.4)" stroke="#34d399" stroke-width="1.5" rx="3"/>
+        <text x="363" y="42" fill="#94a3b8" font-size="8">Task</text>
+        
+        <polygon points="440,38 447,33 454,38 447,43" fill="rgba(6, 78, 59, 0.4)" stroke="#34d399" stroke-width="1.5"/>
+        <text x="459" y="42" fill="#94a3b8" font-size="8">XOR Gateway</text>
+        
+        <polygon points="520,38 527,33 534,38 527,43" fill="rgba(6, 78, 59, 0.4)" stroke="#34d399" stroke-width="1.5"/>
+        <text x="539" y="42" fill="#94a3b8" font-size="8">AND Gateway</text>
+        
+        <line x1="30" y1="55" x2="55" y2="55" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+        <text x="62" y="59" fill="#94a3b8" font-size="8">Sequence Flow</text>
+        
+        <line x1="160" y1="55" x2="185" y2="55" stroke="#fb923c" stroke-width="1.5" stroke-dasharray="6,4" marker-end="url(#arrowhead)"/>
+        <text x="192" y="59" fill="#94a3b8" font-size="8">Message Flow</text>
+        
+        <text x="30" y="75" fill="#64748b" font-size="8">14 Statutory Checks: HU VAT Act §169 | ISA 240/320/500 | GDPR Art.28 | Ptk.6:98 | AML Sanctions</text>
+      </g>
+    </svg>
+  </div>
+  
+  <div class="cards">
+    <div class="card">
+      <div class="card-header">
+        <div class="card-dot cyan"></div>
+        <h3>Client (Attorney) Flow</h3>
+      </div>
+      <ul>
+        <li>• Initiate Zero-Claw encrypted chat</li>
+        <li>• Upload legal documents for review</li>
+        <li>• Signature deadline tracking (timer event)</li>
+        <li>• Receive ABA-compliant legal opinion</li>
+        <li>• Peter Solinsky (psolinskyesq@gmail.com) - first UX tester</li>
+      </ul>
+    </div>
+    
+    <div class="card">
+      <div class="card-header">
+        <div class="card-dot rose"></div>
+        <h3>Zero-Claw System</h3>
+      </div>
+      <ul>
+        <li>• E2E encrypted chat (chat.mobilemonero.com)</li>
+        <li>• Room creator API (rooms.mobilemonero.com)</li>
+        <li>• ABA Model Rule 1.6 compliant</li>
+        <li>• PaperHawk: 14 statutory compliance checks</li>
+        <li>• Violation report generation on failures</li>
+      </ul>
+    </div>
+    
+    <div class="card">
+      <div class="card-header">
+        <div class="card-dot emerald"></div>
+        <h3>ModelCourt Tribunal</h3>
+      </div>
+      <ul>
+        <li>• 8 AI agent judges (parallel analysis)</li>
+        <li>• AMD MI300X vLLM (Qwen 2.5 14B)</li>
+        <li>• Chief Judge synthesizes verdict</li>
+        <li>• 6-layer anti-hallucination system</li>
+        <li>• Citation enforcement + source verification</li>
+      </ul>
+    </div>
+    
+    <div class="card">
+      <div class="card-header">
+        <div class="card-dot amber"></div>
+        <h3>Compliance Checks</h3>
+      </div>
+      <ul>
+        <li>• HU VAT Act §169 (Hungarian VAT)</li>
+        <li>• ISA 240/320/500 (Audit Standards)</li>
+        <li>• GDPR Art.28 (Data Processing)</li>
+        <li>• Ptk.6:98 (Hungarian Civil Code)</li>
+        <li>• AML Sanctions (Anti-Money Laundering)</li>
+      </ul>
+    </div>
+  </div>
+  
+  <div class="footer">
+    Generated: June 11, 2026 | BPMN 2.0 Standard | Zero-Claw Legal Tech Stack | ABA Model Rule 1.6 Compliant
+  </div>
+</body>
+</html>
