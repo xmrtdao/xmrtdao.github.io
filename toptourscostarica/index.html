@@ -29,14 +29,26 @@
         .contact-btn:hover { background: #fbbf24; }
         
         /* Hero */
-        .hero { background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect fill="%23059669" width="1200" height="600"/><text x="50%" y="50%" font-size="72" fill="white" text-anchor="middle" font-family="sans-serif">🌋 Arenal Volcano</text></svg>'); background-size: cover; background-position: center; color: white; padding: 8rem 1rem 6rem; text-align: center; }
-        .hero h1 { font-size: 3rem; margin-bottom: 1rem; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
-        .hero p { font-size: 1.25rem; max-width: 600px; margin: 0 auto 2rem; text-shadow: 1px 1px 2px rgba(0,0,0,0.5); }
+        .hero { 
+            background: linear-gradient(rgba(5, 150, 105, 0.1), rgba(5, 150, 105, 0.1)), url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><defs><linearGradient id="sky" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" style="stop-color:%2387CEEB;stop-opacity:1" /><stop offset="100%" style="stop-color:%23E0F2FE;stop-opacity:1" /></linearGradient></defs><rect fill="url(%23sky)" width="1200" height="600"/><ellipse cx="600" cy="500" rx="200" ry="100" fill="%23059669" opacity="0.3"/><text x="50%" y="50%" font-size="72" fill="white" text-anchor="middle" font-family="sans-serif">🌋</text></svg>'); 
+            background-size: cover; 
+            background-position: center; 
+            color: var(--dark); 
+            padding: 8rem 1rem 6rem; 
+            text-align: center; 
+        }
+        .hero-brand { background: white; display: inline-block; padding: 0.5rem 1.5rem; border-radius: 50px; margin-bottom: 1.5rem; box-shadow: 0 4px 15px rgba(5, 150, 105, 0.2); }
+        .hero-brand span { color: var(--primary); font-weight: bold; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 2px; }
+        .hero h1 { font-size: 3.5rem; margin-bottom: 1rem; color: var(--primary-dark); text-shadow: none; font-weight: 800; }
+        .hero p { font-size: 1.25rem; max-width: 600px; margin: 0 auto 2rem; color: #4b5563; text-shadow: none; }
+        .hero-tagline { color: var(--accent); font-weight: 600; font-size: 1.1rem; margin-bottom: 2rem; }
         .hero-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
         .btn { padding: 1rem 2rem; border-radius: 8px; font-weight: bold; text-decoration: none; display: inline-block; transition: transform 0.2s; }
         .btn:hover { transform: translateY(-2px); }
-        .btn-primary { background: var(--accent); color: var(--dark); }
-        .btn-outline { border: 2px solid white; color: white; }
+        .btn-primary { background: var(--primary); color: white; }
+        .btn-primary:hover { background: var(--primary-dark); }
+        .btn-outline { border: 2px solid var(--primary); color: var(--primary); }
+        .btn-outline:hover { background: var(--primary); color: white; }
         
         /* Tours Grid */
         .tours-section { padding: 4rem 1rem; background: var(--light); }
@@ -106,11 +118,15 @@
     </header>
 
     <section class="hero">
-        <h1>🌋 Top Tours Costa Rica</h1>
-        <p>Operated by Tayra Tours in La Fortuna - Your gateway to unforgettable Arenal adventures</p>
+        <div class="hero-brand">
+            <span>🌿 Tayra Tours Presents</span>
+        </div>
+        <h1>Top Tours Costa Rica</h1>
+        <p class="hero-tagline">Operated by Tayra Tours in La Fortuna</p>
+        <p>Your gateway to unforgettable Arenal adventures — volcanic hikes, natural hot springs, wildlife encounters, and hidden waterfalls</p>
         <div class="hero-buttons">
-            <a href="#tours" class="btn btn-primary">View Tours</a>
-            <a href="https://wa.me/50683079348?text=Hi%20Tayra%20Tours%2C%20I%20need%20help%20choosing%20a%20tour!" class="btn btn-outline">Get Help</a>
+            <a href="#tours" class="btn btn-primary">📅 Book Your Adventure</a>
+            <a href="https://wa.me/50683079348?text=Hi%20Tayra%20Tours%2C%20I%20need%20help%20choosing%20a%20tour!" class="btn btn-outline">💬 Chat on WhatsApp</a>
         </div>
     </section>
 
