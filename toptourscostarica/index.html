@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Top Tours Costa Rica | Tayra Tours - La Fortuna</title>
+    <meta name="description" content="Book unforgettable Costa Rica adventures with Tayra Tours in La Fortuna. Arenal Volcano, hot springs, waterfall hikes, wildlife tours & more. WhatsApp +506 8307-9348">
+    <meta name="theme-color" content="#059669">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary: #059669;
+            --primary-dark: #047857;
+            --accent: #f59e0b;
+            --dark: #1f2937;
+            --light: #f9fafb;
+        }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: var(--dark); }
+        
+        /* Header */
+        header { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%); color: white; padding: 1rem; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .header-content { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 1.5rem; font-weight: bold; }
+        .logo span { color: var(--accent); }
+        nav ul { display: flex; list-style: none; gap: 1.5rem; }
+        nav a { color: white; text-decoration: none; font-weight: 500; }
+        nav a:hover { color: var(--accent); }
+        .contact-btn { background: var(--accent); color: var(--dark); padding: 0.5rem 1rem; border-radius: 8px; font-weight: bold; text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem; }
+        .contact-btn:hover { background: #fbbf24; }
+        
+        /* Hero */
+        .hero { background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect fill="%23059669" width="1200" height="600"/><text x="50%" y="50%" font-size="72" fill="white" text-anchor="middle" font-family="sans-serif">🌋 Arenal Volcano</text></svg>'); background-size: cover; background-position: center; color: white; padding: 8rem 1rem 6rem; text-align: center; }
+        .hero h1 { font-size: 3rem; margin-bottom: 1rem; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
+        .hero p { font-size: 1.25rem; max-width: 600px; margin: 0 auto 2rem; text-shadow: 1px 1px 2px rgba(0,0,0,0.5); }
+        .hero-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+        .btn { padding: 1rem 2rem; border-radius: 8px; font-weight: bold; text-decoration: none; display: inline-block; transition: transform 0.2s; }
+        .btn:hover { transform: translateY(-2px); }
+        .btn-primary { background: var(--accent); color: var(--dark); }
+        .btn-outline { border: 2px solid white; color: white; }
+        
+        /* Tours Grid */
+        .tours-section { padding: 4rem 1rem; background: var(--light); }
+        .section-title { text-align: center; margin-bottom: 3rem; }
+        .section-title h2 { font-size: 2.5rem; color: var(--primary-dark); margin-bottom: 0.5rem; }
+        .section-title p { color: #6b7280; font-size: 1.1rem; }
+        .tours-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; }
+        .tour-card { background: white; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.1); transition: transform 0.2s, box-shadow 0.2s; }
+        .tour-card:hover { transform: translateY(-4px); box-shadow: 0 10px 20px rgba(0,0,0,0.15); }
+        .tour-image { height: 200px; background: linear-gradient(135deg, #059669 0%, #10b981 100%); display: flex; align-items: center; justify-content: center; font-size: 4rem; }
+        .tour-content { padding: 1.5rem; }
+        .tour-title { font-size: 1.5rem; color: var(--primary-dark); margin-bottom: 0.5rem; }
+        .tour-duration { color: #6b7280; font-size: 0.9rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; }
+        .tour-description { color: #4b5563; margin-bottom: 1rem; }
+        .tour-price { font-size: 1.5rem; font-weight: bold; color: var(--primary); margin-bottom: 1rem; }
+        .tour-price span { font-size: 0.9rem; color: #6b7280; font-weight: normal; }
+        .book-btn { width: 100%; background: #25D366; color: white; padding: 1rem; border: none; border-radius: 8px; font-weight: bold; font-size: 1rem; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 0.5rem; text-decoration: none; transition: background 0.2s; }
+        .book-btn:hover { background: #128C7E; }
+        
+        /* Features */
+        .features { padding: 4rem 1rem; background: white; }
+        .features-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; }
+        .feature { text-align: center; padding: 2rem; }
+        .feature-icon { font-size: 3rem; margin-bottom: 1rem; }
+        .feature h3 { color: var(--primary-dark); margin-bottom: 0.5rem; }
+        .feature p { color: #6b7280; }
+        
+        /* About */
+        .about { padding: 4rem 1rem; background: var(--light); }
+        .about-content { max-width: 800px; margin: 0 auto; text-align: center; }
+        .about h2 { font-size: 2.5rem; color: var(--primary-dark); margin-bottom: 1rem; }
+        .about p { color: #4b5563; margin-bottom: 1.5rem; }
+        
+        /* Contact Bar */
+        .contact-bar { background: var(--dark); color: white; padding: 2rem 1rem; text-align: center; }
+        .contact-bar h2 { margin-bottom: 1rem; }
+        .whatsapp-large { display: inline-flex; align-items: center; gap: 0.75rem; background: #25D366; color: white; padding: 1rem 2rem; border-radius: 12px; font-size: 1.25rem; font-weight: bold; text-decoration: none; margin-top: 1rem; transition: background 0.2s; }
+        .whatsapp-large:hover { background: #128C7E; }
+        
+        /* Footer */
+        footer { background: var(--dark); color: #9ca3af; padding: 2rem 1rem; text-align: center; }
+        footer p { margin-bottom: 0.5rem; }
+        
+        /* Mobile */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2rem; }
+            nav ul { display: none; }
+            .header-content { flex-wrap: wrap; gap: 1rem; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="logo">Tayra <span>Tours</span></div>
+            <nav>
+                <ul>
+                    <li><a href="#tours">Tours</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+            <a href="https://wa.me/50683079348?text=Hi%20Tayra%20Tours%2C%20I%27d%20like%20to%20book%20a%20tour!" class="contact-btn">
+                <span>📱</span> WhatsApp
+            </a>
+        </div>
+    </header>
+
+    <section class="hero">
+        <h1>🌋 Top Tours Costa Rica</h1>
+        <p>Operated by Tayra Tours in La Fortuna - Your gateway to unforgettable Arenal adventures</p>
+        <div class="hero-buttons">
+            <a href="#tours" class="btn btn-primary">View Tours</a>
+            <a href="https://wa.me/50683079348?text=Hi%20Tayra%20Tours%2C%20I%20need%20help%20choosing%20a%20tour!" class="btn btn-outline">Get Help</a>
+        </div>
+    </section>
+
+    <section id="tours" class="tours-section">
+        <div class="section-title">
+            <h2>Our Most Popular Tours</h2>
+            <p>Handpicked adventures in La Fortuna & Arenal Volcano National Park</p>
+        </div>
+        <div class="tours-grid">
+            <!-- Tour 1 -->
+            <div class="tour-card">
+                <div class="tour-image">🌋</div>
+                <div class="tour-content">
+                    <h3 class="tour-title">Arenal Volcano Hike</h3>
+                    <div class="tour-duration">⏱️ 4 hours • 🥾 Moderate difficulty</div>
+                    <p class="tour-description">Explore ancient lava flows, hike through primary rainforest, and learn about volcanic activity from expert local guides. Includes transportation from La Fortuna.</p>
+                    <div class="tour-price">$65 USD <span>per person</span></div>
+                    <a href="https://wa.me/50683079348?text=Hi%20Tayra%20Tours%2C%20I%27d%20like%20to%20book%20the%20Arenal%20Volcano%20Hike!" class="book-btn">
+                        <span>💬</span> Book via WhatsApp
+                    </a>
+                </div>
+            </div>
+
+            <!-- Tour 2 -->
+            <div class="tour-card">
+                <div class="tour-image">♨️</div>
+                <div class="tour-content">
+                    <h3 class="tour-title">Hot Springs Adventure</h3>
+                    <div class="tour-duration">⏱️ 5 hours • 🏊 Relaxing</div>
+                    <p class="tour-description">Soak in natural thermal hot springs surrounded by rainforest. Visit multiple pools with varying temperatures. Dinner included.</p>
+                    <div class="tour-price">$85 USD <span>per person</span></div>
+                    <a href="https://wa.me/50683079348?text=Hi%20Tayra%20Tours%2C%20I%27d%20like%20to%20book%20the%20Hot%20Springs%20Adventure!" class="book-btn">
+                        <span>💬</span> Book via WhatsApp
+                    </a>
+                </div>
+            </div>
+
+            <!-- Tour 3 -->
+            <div class="tour-card">
+                <div class="tour-image">🦜</div>
+                <div class="tour-content">
+                    <h3 class="tour-title">Wildlife & Bird Watching</h3>
+                    <div class="tour-duration">⏱️ 6 hours • 📸 Photography friendly</div>
+                    <p class="tour-description">Spot toucans, sloths, monkeys, and exotic birds in their natural habitat. Early morning tour with expert naturalist guide. Binoculars provided.</p>
+                    <div class="tour-price">$75 USD <span>per person</span></div>
+                    <a href="https://wa.me/50683079348?text=Hi%20Tayra%20Tours%2C%20I%27d%20like%20to%20book%20the%20Wildlife%20%26%20Bird%20Watching%20tour!" class="book-btn">
+                        <span>💬</span> Book via WhatsApp
+                    </a>
+                </div>
+            </div>
+
+            <!-- Tour 4 -->
+            <div class="tour-card">
+                <div class="tour-image">💧</div>
+                <div class="tour-content">
+                    <h3 class="tour-title">La Fortuna Waterfall</h3>
+                    <div class="tour-duration">⏱️ 3 hours • 💪 Active</div>
+                    <p class="tour-description">Hike down 500 steps to the base of the stunning 70-meter waterfall. Swim in the cold mountain pool. Includes hotel pickup.</p>
+                    <div class="tour-price">$45 USD <span>per person</span></div>
+                    <a href="https://wa.me/50683079348?text=Hi%20Tayra%20Tours%2C%20I%27d%20like%20to%20book%20the%20La%20Fortuna%20Waterfall%20tour!" class="book-btn">
+                        <span>💬</span> Book via WhatsApp
+                    </a>
+                </div>
+            </div>
+
+            <!-- Tour 5 -->
+            <div class="tour-card">
+                <div class="tour-image">🌉</div>
+                <div class="tour-content">
+                    <h3 class="tour-title">Hanging Bridges</h3>
+                    <div class="tour-duration">⏱️ 4 hours • 🌳 Canopy views</div>
+                    <p class="tour-description">Walk across 16 suspension bridges through the rainforest canopy. See wildlife from above. Great for all ages and fitness levels.</p>
+                    <div class="tour-price">$95 USD <span>per person</span></div>
+                    <a href="https://wa.me/50683079348?text=Hi%20Tayra%20Tours%2C%20I%27d%20like%20to%20book%20the%20Hanging%20Bridges%20tour!" class="book-btn">
+                        <span>💬</span> Book via WhatsApp
+                    </a>
+                </div>
+            </div>
+
+            <!-- Tour 6 -->
+            <div class="tour-card">
+                <div class="tour-image">🚣</div>
+                <div class="tour-content">
+                    <h3 class="tour-title">Lake Arenal Kayaking</h3>
+                    <div class="tour-duration">⏱️ 5 hours • 🏞️ Scenic</div>
+                    <p class="tour-description">Paddle across Costa Rica's largest lake with stunning volcano views. Includes safety equipment, guide, and lakeside lunch.</p>
+                    <div class="tour-price">$80 USD <span>per person</span></div>
+                    <a href="https://wa.me/50683079348?text=Hi%20Tayra%20Tours%2C%20I%27d%20like%20to%20book%20the%20Lake%20Arenal%20Kayaking%20tour!" class="book-btn">
+                        <span>💬</span> Book via WhatsApp
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="features">
+        <div class="features-grid">
+            <div class="feature">
+                <div class="feature-icon">🏆</div>
+                <h3>Local Experts</h3>
+                <p>Born and raised in La Fortuna, our guides know every hidden trail and secret spot</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">🌿</div>
+                <h3>Eco-Friendly</h3>
+                <p>Sustainable tourism practices that protect Costa Rica's natural beauty</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">💯</div>
+                <h3>Best Price Guarantee</h3>
+                <p>Direct booking with no middleman fees - unbeatable prices</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">🕐</div>
+                <h3>Flexible Booking</h3>
+                <p>Free cancellation up to 24 hours before your tour</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="about">
+        <div class="about-content">
+            <h2>About Tayra Tours</h2>
+            <p>We are a family-owned tour operator based in La Fortuna, Costa Rica. For over 15 years, we've been showing visitors the magic of Arenal Volcano National Park and the surrounding rainforest.</p>
+            <p>Our name comes from the tayra, a native Costa Rican mammal known for its agility and curiosity - qualities we bring to every adventure we lead.</p>
+            <p><strong>📍 Location:</strong> La Fortuna, Alajuela Province, Costa Rica</p>
+            <p><strong>📞 Phone / WhatsApp:</strong> +506 8307-9348</p>
+            <p><strong>✉️ Email:</strong> info@tayratours.cr</p>
+        </div>
+    </section>
+
+    <section id="contact" class="contact-bar">
+        <h2>Ready to Book Your Adventure?</h2>
+        <p>Message us on WhatsApp for instant booking confirmation</p>
+        <a href="https://wa.me/50683079348?text=Hi%20Tayra%20Tours%2C%20I%27m%20interested%20in%20booking%20a%20tour%20in%20La%20Fortuna!" class="whatsapp-large">
+            <span>💬</span> +506 8307-9348
+        </a>
+        <p style="margin-top: 1rem; font-size: 0.9rem; color: #9ca3af;">We typically respond within 15 minutes</p>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Tayra Tours - La Fortuna, Costa Rica</p>
+        <p>Operated by Tayra Tours | WhatsApp: +506 8307-9348</p>
+        <p style="margin-top: 1rem; font-size: 0.8rem;">
+            <a href="/" style="color: #6b7280; text-decoration: none;">← Back to XMRT DAO</a>
+        </p>
+    </footer>
+
+    <script>
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Track WhatsApp clicks (optional analytics)
+        document.querySelectorAll('a[href*="wa.me"]').forEach(link => {
+            link.addEventListener('click', function() {
+                console.log('WhatsApp booking click:', this.href);
+            });
+        });
+    </script>
+</body>
+</html>
