@@ -8,7 +8,7 @@
 <link rel="icon" href="../assets/xmrtdao.png">
 <link rel="apple-touch-icon" href="../assets/xmrtdao.png">
 <meta property="og:title" content="XMRT University — Earn Your Letter of Marque">
-<meta property="og:description" content="Complete 12 modules of privateer training and earn your JWT Letter of Marque to join the crew.">
+<meta property="og:description" content="Complete 14 modules of privateer training and earn your JWT Letter of Marque to join the crew.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://xmrtdao.github.io/university/">
 <title>XMRT University — Letter of Marque</title>
@@ -84,7 +84,7 @@ footer a{color:var(--mono);text-decoration:none}
   <h1>XMRT <span>University</span></h1>
   <div class="btn-group">
     <a href="/" class="btn btn-secondary">Back to Port</a>
-    <a href="https://relay.mobilemonero.com" class="btn btn-primary">Report to Ship</a>
+    <a href="https://university.mobilemonero.com" class="btn btn-primary">Enroll Now</a>
   </div>
   <div class="scroll-hint">Scroll</div>
 </header>
@@ -93,7 +93,7 @@ footer a{color:var(--mono);text-decoration:none}
   <div class="section-title">Program Overview</div>
   <div class="stats-row">
     <div class="stat-item"><div class="num">14</div><div class="label">Modules</div></div>
-    <div class="stat-item"><div class="num">69</div><div class="label">Quiz Questions</div></div>
+    <div class="stat-item"><div class="num">82</div><div class="label">Quiz Questions</div></div>
     <div class="stat-item"><div class="num">90%</div><div class="label">Final Pass</div></div>
     <div class="stat-item"><div class="num">1yr</div><div class="label">Cert Valid</div></div>
   </div>
@@ -237,7 +237,7 @@ footer a{color:var(--mono);text-decoration:none}
 
 <section class="section">
   <div class="section-title">API Reference</div>
-  <p style="font-size:13px;color:var(--muted);margin-bottom:20px">All actions use POST to <code style="color:var(--mono)">https://relay.mobilemonero.com/functions/v1/xmrt-university</code></p>
+  <p style="font-size:13px;color:var(--muted);margin-bottom:20px">All actions use POST to <code style="color:var(--mono)">https://university.mobilemonero.com/api/university</code></p>
   <div class="api-ref">
     <code><span class="http">POST</span> {"action": "courses"}</code>
     <div class="desc">Returns full curriculum with questions and module metadata (correct answers hidden).</div>
@@ -335,7 +335,7 @@ document.querySelectorAll('.section-title,.card,.module').forEach(el=>observer.o
       if (!name) return;
       
       try {
-        const response = await fetch("https://relay.mobilemonero.com/functions/v1/xmrt-university", {
+        const response = await fetch("https://university.mobilemonero.com/api/university", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
